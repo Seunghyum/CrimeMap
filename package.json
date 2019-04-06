@@ -9,7 +9,6 @@
     "dev": "NODE_ENV=development nodemon --exec babel-node ./server/main.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "build2": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
     "build": "babel server --out-dir build && ./node_modules/.bin/webpack"
   },
   "devDependencies": {
