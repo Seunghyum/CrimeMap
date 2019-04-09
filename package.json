@@ -1,42 +1,30 @@
 {
-  "name": "Event-map",
+  "name": "event-map",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "문승현 <antmgu@gmail.com>",
   "license": "MIT",
+  "main": "dist/index.ts",
+  "engines": {
+    "node": "8.x",
+    "yarn": "1.x"
+  },
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "dev": "NODE_ENV=development nodemon --exec babel-node ./server/main.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch",
-    "build": "babel server --out-dir build && ./node_modules/.bin/webpack"
+    "install": "yarn install:backend && yarn install:frontend",
+    "install:backend": "cd backend && yarn install",
+    "install:frontend": "cd frontend && yarn install",
+    "build": "yarn build:backend && yarn build:frontend",
+    "build:backend": "cd backend && yarn build",
+    "build:frontend": "cd frontend && yarn build",
+    "start": "concurrently \"yarn start:backend\" \"yarn start:frontend\"",
+    "start:db": "sudo mongod --dbpath /data/test/ --port 27017",
+    "start:backend": "cd backend && yarn start",
+    "start:frontend": "cd frontend && yarn start",
+    "test": "yarn test:backend && yarn test:frontend",
+    "test:backend": "cd backend && yarn test",
+    "test:frontend": "cd frontend && yarn test",
+    "serve": "cd backend && node build/server.js"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "babel-core": "^6.2.1",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^6.2.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-react": "^6.1.18",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "nodemon": "^1.18.10",
-    "react-hot-loader": "^4.8.2",
-    "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
-  },
-  "dependencies": {
-    "babel-preset-stage-1": "^6.1.18",
-    "express": "^4.16.4",
-    "lodash": "^3.10.1",
-    "react": "16.3.2",
-    "react-dom": "16.3.2",
-    "react-redux": "5.0.7",
-    "redux": "4.0.0",
-    "youtube-api-search": "0.0.5"
+    "concurrently": "^4.1.0"
   }
 }
