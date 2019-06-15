@@ -2,5 +2,8 @@ yarn-error.log
 /node_modules
 backend/node_modules
 backend/yarn-error.log
+backend/dist
+frontend/.cache
+frontend/dist
 frontend/node_modules
 frontend/yarn-error.log
