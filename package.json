@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "author": "문승현 <antmgu@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.ts",
   "engines": {
     "yarn": "1.x"
   },

@@ -4,7 +4,7 @@
     "module": "commonjs",
     "strict": true,
     "jsx": "react",
-    "rootDir": "./src",
+    "rootDir": "./",
     "incremental": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es2015"]
