@@ -1,18 +1,37 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
 import * as React from "react";
+import reactAsyncScript from "react-async-script";
+
+const ClientId:string = 'l98mpxcbdb';
+const URL:string = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ClientId}`;
+
+const NaverMapLoad = reactAsyncScript(URL, {
+  callbackName: null,
+  globalName: "naver",
+})(
+  () => <div id="map" />
+);
 
 interface Props {}
-
-const CENTER: [number, number] = [37.3595704, 127.105399];
-
 class NaverMap extends React.Component<Props> {
+  constructor(props: any) {
+    super(props);
+  }
+
+  scriptOnLoad() {
+    const naver = window.naver;
+    const center = new naver.maps.LatLng(36.0095704, 127.705399);
+    const zoom = 2;
+    const map =  new naver.maps.Map('map',{
+      center,
+      zoom, 
+    });
+  }
+
   render() {
     return (
-      <div>
-        <h1>네이버지도 자리</h1>
-      </div>
+      <NaverMapLoad asyncScriptOnLoad={this.scriptOnLoad} />
     );
   }
 }
-
 export default NaverMap;
