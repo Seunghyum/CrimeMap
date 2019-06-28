@@ -31,9 +31,11 @@
     "Parcel"
   ],
   "dependencies": {
+    "@types/react-router-dom": "^4.3.4",
     "react": "^16.8.6",
     "react-async-script": "^1.0.1",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^11.13.6",
