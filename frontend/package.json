@@ -31,7 +31,6 @@
     "Parcel"
   ],
   "dependencies": {
-    "@types/react-router-dom": "^4.3.4",
     "react": "^16.8.6",
     "react-async-script": "^1.0.1",
     "react-dom": "^16.8.6",
@@ -41,6 +40,7 @@
     "@types/node": "^11.13.6",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.4",
     "concurrently": "^4.1.0",
     "husky": "^1.3.1",
     "parcel-bundler": "^1.12.3",
