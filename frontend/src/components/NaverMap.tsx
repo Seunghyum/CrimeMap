@@ -1,7 +1,7 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
 import React, { Component } from "react";
 import reactAsyncScript from "react-async-script";
-import sidoGeojson from '../../sido_2009.json';
+import sidoGeojson from "../../sido_2009.json";
 
 const ClientId: string = "l98mpxcbdb";
 const URL: string = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ClientId}`;
@@ -11,12 +11,20 @@ const NaverMapLoad = reactAsyncScript(URL, {
   globalName: "naver"
 })(() => <div id="map" />);
 
+interface ObjectLiteral {
+  fillColor: string,
+  fillOpacity: number,
+  strokeColor: string,
+  strokeWeight: number,
+  strokeOpacity: number,
+}
+
 interface Props {}
 class NaverMap extends Component<Props> {
   constructor(props: any) {
     super(props);
   }
-  
+
   naverMapscriptOnLoad() {
     const naver = window.naver;
     const center = new naver.maps.LatLng(36.0095704, 127.705399);
@@ -26,42 +34,42 @@ class NaverMap extends Component<Props> {
       zoom
     });
 
-    sidoGeojson.forEach((geojson) => {
+    sidoGeojson.forEach(geojson => {
       map.data.addGeoJson(geojson);
     });
 
-    map.data.setStyle((feature:any) => {
-        let styleOptions:any = {
-            fillColor: '#e5f5f9',
-            fillOpacity: 0.0001,
-            strokeColor: '#99d8c9',
-            strokeWeight: 2,
-            strokeOpacity: 0.4
-        };
+    map.data.setStyle((feature: any) => {
+      let styleOptions: ObjectLiteral = {
+        fillColor: "#9ecae1",
+        fillOpacity: 0.0001,
+        strokeColor: "#6baed6",
+        strokeWeight: 2,
+        strokeOpacity: 0.4
+      };
 
-        if (feature.getProperty('focus')) {
-            styleOptions.fillOpacity = 0.6;
-            styleOptions.fillColor = '#0f0';
-            styleOptions.strokeColor = '#0f0';
-            styleOptions.strokeWeight = 4;
-            styleOptions.strokeOpacity = 1;
-        }
+      if (feature.getProperty("focus")) {
+        styleOptions.fillOpacity = 0.6;
+        styleOptions.fillColor = "#0f0";
+        styleOptions.strokeColor = "#0f0";
+        styleOptions.strokeWeight = 4;
+        styleOptions.strokeOpacity = 1;
+      }
 
-        return styleOptions;
+      return styleOptions;
     });
 
-    map.data.addListener('click', (e) => {
-      const feature:any = e.feature;
+    map.data.addListener("click", e => {
+      const feature: any = e.feature;
 
-      if (feature.getProperty('focus') !== true) {
-          feature.setProperty('focus', true);
+      if (feature.getProperty("focus") !== true) {
+        feature.setProperty("focus", true);
       } else {
-          feature.setProperty('focus', false);
+        feature.setProperty("focus", false);
       }
     });
 
-    map.data.addListener('mouseover', (e) => {
-      const feature:any = e.feature;
+    map.data.addListener("mouseover", e => {
+      const feature: any = e.feature;
 
       map.data.overrideStyle(feature, {
         fillOpacity: 0.6,
@@ -70,10 +78,9 @@ class NaverMap extends Component<Props> {
       });
     });
 
-    map.data.addListener('mouseout', (e) => {
+    map.data.addListener("mouseout", e => {
       map.data.revertStyle();
     });
-
   }
 
   render() {
