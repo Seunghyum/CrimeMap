@@ -1,6 +1,6 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
-import React, {Component} from "react";
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   // currentTab: string

@@ -1,5 +1,5 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
-import React, {Component} from "react";
+import React, { Component } from "react";
 import reactAsyncScript from "react-async-script";
 
 const ClientId: string = "l98mpxcbdb";
