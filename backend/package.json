@@ -33,7 +33,9 @@
     "cors": "^2.7.1",
     "express": "^4.13.3",
     "morgan": "^1.8.0",
-    "resource-router-middleware": "^0.6.0"
+    "mysql2": "^1.6.5",
+    "resource-router-middleware": "^0.6.0",
+    "sequelize": "^5.9.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

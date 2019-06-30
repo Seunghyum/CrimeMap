@@ -3,9 +3,9 @@ yarn-error.log
 backend/node_modules
 backend/yarn-error.log
 backend/dist
+backend/src/config.json
 frontend/.cache
 frontend/dist
 frontend/node_modules
 frontend/yarn-error.log
-config
 credentials.csv
