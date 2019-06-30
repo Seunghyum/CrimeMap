@@ -18,7 +18,9 @@
     "start:frontend": "cd frontend && yarn start",
     "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
     "dev:backend": "cd backend && yarn dev",
-    "dev:frontend": "cd frontend && yarn dev"
+    "dev:frontend": "cd frontend && yarn dev",
+    "pull-config": "aws s3 cp s3://crime-config ./config --recursive",
+    "push-config": "aws s3 cp ./config s3://crime-config --recursive"
   },
   "devDependencies": {
     "concurrently": "^4.1.0"
