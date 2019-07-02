@@ -28,11 +28,15 @@
   "author": "Jason Miller <jason@developit.ca>",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.5",
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
     "cors": "^2.7.1",
     "express": "^4.13.3",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "morgan": "^1.8.0",
+    "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
     "resource-router-middleware": "^0.6.0",
     "sequelize": "^5.9.0"

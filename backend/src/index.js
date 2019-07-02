@@ -7,13 +7,16 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import initializeDb from './db';
 import middleware from './middleware';
 import api from './api';
 import path from 'path';
+import lodash from 'lodash';
+import Mysql from './mysql';
+
+global._ = lodash;
 
 const CONFIG_PATH = path.resolve(__dirname, 'config.json');
-const config = require(CONFIG_PATH);
+global.__config = require(CONFIG_PATH);
 
 let app = express();
 app.server = http.createServer(app);
@@ -25,21 +28,23 @@ app.server = http.createServer(app);
 app.use(morgan('dev'));
 
 app.use(cors({
-	exposedHeaders: config.corsHeaders
+	exposedHeaders: __config.corsHeaders
 }));
 
 app.use(bodyParser.json({
-	limit: config.bodyLimit
+	limit: __config.bodyLimit
 }));
 
-// connect to db
-initializeDb( db => {
-    const { app } = config;
-    const { dev } = app;
+// 데이터 베이스 연결
+(() => {
+    const { dev } = __config.app;
+
+    const mysql = new Mysql();
+    mysql.init();
 
     app.server.listen(process.env.PORT || dev.port, () => {
         console.log(`Started on port ${app.server.address().port}`);
     });
-});
+})();
 
 export default app;
