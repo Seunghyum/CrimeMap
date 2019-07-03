@@ -28,11 +28,11 @@ app.server = http.createServer(app);
 app.use(morgan('dev'));
 
 app.use(cors({
-	exposedHeaders: __config.corsHeaders
+	exposedHeaders: __config.app.corsHeaders
 }));
 
 app.use(bodyParser.json({
-	limit: __config.bodyLimit
+	limit: __config.app.bodyLimit
 }));
 
 // 데이터 베이스 연결
