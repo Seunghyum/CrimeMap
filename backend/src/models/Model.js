@@ -1,16 +1,9 @@
 import mysql from '../mysql';
-const MYSQL_OP = {
-    OR: '||',
-    GT: '>',
-    LT: '<',
-    GE: '>=',
-    LE: '<=',
-    NOT: '!='
-};
 
 class Model {
     constructor(options) {
         const { table, excludes, parseData } = options;
+        this.mysql = mysql;
         this.table = table;
         this.excludes = excludes || [];
         this.parseData = _.isFunction(parseData) ? parseData : null;
@@ -48,11 +41,7 @@ class Model {
 
     fetchById(id) {
         return mysql.query('SELECT * FROM ? WHERE id = ?', [this.table ,id]).then((result) => {
-            if (_.isEmpty(result)) {
-                return Promise.reject('데이터가 존재 하지 않습니다.');
-            }
-
-            return _.head(result);
+            return _.head(this.parse(result));
         }).fail((reason) => {
             return Promise.reject(reason);
         });
@@ -71,46 +60,115 @@ class Model {
 
             }
         } || string ,
-
+        && {
+            id: [1,3,4,2],
+            good: 1
+        }
         order [],
         limit 100
     */
     fetchList({ where, order, limit }) {
         if (_.isEmpty(where)) {
-            let whereString = 'WHERE ';
-            let orderString = 'ORDER ';
-            let limitString = 'LIMIT ';
-
-            _.each(where, (data, operator) => {
-                if (MYSQL_OP[operator]) {
-                    _.each(data, (value, key) => {
-                        whereString += `${key} ${operator} ${value} `;
-                    });
-                }
-            });
-
-            if (order && _.isArray(order)) {
-                orderString += order.join(', ');
-            }
-
-            if (limit && _.isNumber(limit)) {
-                limitString += limit
-            }
-
-            return mysql.query(`SELECT * FROM WHERE ${whereString} ${orderString} ${limitString}`);
+            return Promise.reject('SELECT할 조건이 필요합니다.');
         }
+        let orderString = '';
+        let limitString = '';
+
+        if (order && _.isArray(order)) {
+            orderString += `ORDER BY ${order.join(', ')}`;
+        }
+
+        if (limit && _.isNumber(limit)) {
+            limitString = `LIMIT ${limit}`
+        }
+
+        return this.mysql.query(`
+            SELECT *
+            FROM ?
+            WHERE ${this.createWhere(where)}
+            ${orderString}
+            ${limitString}
+        `,
+            [this.table]
+        ).then((result) => {
+            return this.parse(result);
+        }).fail((reason) => {
+            return Promise.reject(reason);
+        });
     }
 
-    update(where) {
-        mysql.query();
+    update(updateData, where) {
+        if (!updateData) {
+            return Promise.reject('UPDATE할 데이터가 필요합니다.');
+        }
+
+        let setDatas = [];
+
+        _.each(updateData, (value, key) => {
+            setDatas.push(`${key} = ${value}`);
+        });
+
+        const setQuery = setDatas.join(', ');
+
+        return this.mysql.query(`
+            UPDATE ?
+            SET ${setQuery}
+            WHERE ${this.createWhere({
+                where
+            })}
+        `, [this.table]).then((result) => {
+            console.log(result);
+            return {
+                affectedRows: result.affectedRows
+            }
+        }).fail((reason) => {
+            return Promise.reject(reason);
+        });
     }
 
-    insert(where) {
-        mysql.query();
+    insert(insertData) {
+        if (!insertData) {
+            return Promise.reject('INSERT할 데이터가 필요합니다.');
+        }
+
+        let columns = [];
+        let values = [];
+
+        _.each(insertData, (vlaue, key) => {
+            columns.push(key);
+            values.push(vlaue);
+        });
+
+        return this.mysql.query(`
+            INSERT INTO ?
+                (${columns.join(', ')})
+            VALUES
+                (${values.join(', ')})
+        `, [this.table]).then((result) => {
+            const insertId = result.insertId;
+            return this.fetchById(insertId);
+        }).fail((reason) => {
+            return Promise.reject(reason);
+        });
     }
 
     deleteById(id) {
-        mysql.query();
+        if (!id) {
+            return Promise.reject('DELETE에 필요한 ID가 존재 하지 않습니다.');
+        }
+
+        return this.mysql.query(`
+            DELETE
+            FROM ?
+            WHERE id = ${id}
+        `, [this.table]).then((result) => {
+            console.log(result);
+            return {
+                affectedRows: result.affectedRows
+            }
+        }).fail((reason) => {
+            return Promise.reject(reason);
+        });
     }
 }
 

@@ -1,5 +1,15 @@
 import mysql from 'mysql';
 
+const MYSQL_OP = {
+    OR: '||',
+    GT: '>',
+    LT: '<',
+    GE: '>=',
+    LE: '<=',
+    NOT: '!=',
+    ASSIGNMENT: '='
+};
+
 class Mysql {
     constructor() {
         this._dbConfig = __config.databases;
@@ -74,6 +84,29 @@ class Mysql {
                 });
             });
         });
+    }
+
+    createWhere(where) {
+        const whereArray = [];
+
+        _.each(where, (data, operator) => {
+            if (MYSQL_OP[operator]) {
+                const isAssignment = operator === '=';
+
+                _.each(data, (value, key) => {
+                    if (isAssignment) {
+                        if (_.isArray(value)) {
+                            whereArray.push(`${key} IN (${value.join(', ')})`);
+                            return;
+                        }
+                    }
+
+                    whereArray.push(`${key} ${operator} ${value}`);
+                });
+            }
+        });
+
+        return `${whereArray.join(' AND ')}`
     }
 }
 
