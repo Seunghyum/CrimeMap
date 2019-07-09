@@ -1,0 +1,11 @@
+{
+  "name": "crime-map-task",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/register": "^7.4.4",
+    "gulp": "^4.0.2"
+  }
+}

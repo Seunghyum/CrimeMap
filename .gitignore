@@ -8,4 +8,7 @@ frontend/.cache
 frontend/dist
 frontend/node_modules
 frontend/yarn-error.log
+task/node_modules
+task/yarn-error.log
+files
 credentials.csv
