@@ -31,6 +31,8 @@
     "Parcel"
   ],
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "nouislider": "^14.0.2",
     "react": "^16.8.6",
     "react-async-script": "^1.0.1",
     "react-dom": "^16.8.6",
@@ -38,6 +40,7 @@
   },
   "devDependencies": {
     "@types/node": "^11.13.6",
+    "@types/nouislider": "^9.0.5",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.4",
@@ -47,6 +50,7 @@
     "prettier": "^1.17.0",
     "react-test-renderer": "^16.8.6",
     "react-testing-library": "^6.1.2",
+    "sass": "^1.22.1",
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
