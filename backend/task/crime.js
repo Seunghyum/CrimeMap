@@ -3,6 +3,7 @@ const fs = require('fs');
 const csvParser = require('csv-parse');
 const path = require('path');
 const iconv = require('iconv-lite');
+const _ = require('lodash');
 let mysql;
 
 // const CRIME_TYPE = {
@@ -11,7 +12,7 @@ let mysql;
 //     attempted_murder: '살인미수',
 //     burglary: '강도',
 //     rapist: '강간',
-//     force_ignominy: '강제추행'
+//     force_ignominy: '강제추행',
 //     like_rapist: '유사강간',
 //     etc_rapist: '기타,강간',
 //     arson: '방화',
@@ -36,9 +37,9 @@ const OCCURED_YEAR = {
 };
 
 exports.setCrimeData = async function() {
-    mysql = require('../../backend/lib/mysql.js').get();
+    mysql = require('../src/lib/mysql.js')['defults'];
     console.log('범죄 데이터를 입력한다.');
-    const filePath = path.resolve(__dirname, '../files/crime_by_region.csv');
+    const filePath = path.resolve(__dirname, '../../files/crime_by_region.csv');
     const content = fs.readFileSync(filePath);
     // content를 EUC-KR로 디코딩 해준다.
     const decodeContent = await iconv.decode(content, 'EUC-KR').toString();
@@ -53,25 +54,32 @@ exports.setCrimeData = async function() {
         });
     });
 
-    return promise.then((result) => {
-        _.each(result, async (datas) => {
+    return promise.then((result, index) => {
+        result = result.splice(0, 6);
+        console.log(result);
+        const arr = [];
+
+        let promise = Promise.resolve();
+
+        _.each(result, (datas, index) => {
             const type = datas[0];
             const region_code = datas[1];
             let year = 0;
             let count = 0;
 
-            _.each(datas.splice(4), async (val, index) => {
-                const count = OCCURED_YEAR[index];
-                const occuered_at =
-
-                await mysql.query(`
-                    INSERT INTO crime_region
-                        (type, region_code, count, occuered_at)
-                    VALUES
-                        (1, 41, ${count}, ${moment(occuered_at).endOf('year').utc().format('YYYY-MM-DD HH:mm:ss')})
-                `);
-            });
+            // promise = promise.then(() => {
+            //     return mysql.insert('crime_region', {
+            //         type: index,
+            //         region_code: 41000000,
+            //         count: 9
+            //     });
+            // });
         });
-        return result;
+
+        return promise.then((res) => {
+            return res;
+        }).catch((err) => {
+            console.log(err);
+        });
     });
 }

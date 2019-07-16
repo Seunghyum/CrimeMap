@@ -11,7 +11,6 @@ import middleware from './middleware';
 import api from './api';
 import path from 'path';
 import lodash from 'lodash';
-import Mysql from './mysql';
 
 global._ = lodash;
 
@@ -38,9 +37,6 @@ app.use(bodyParser.json({
 // 데이터 베이스 연결
 (() => {
     const { dev } = __config.app;
-
-    const mysql = new Mysql();
-    mysql.init();
 
     app.server.listen(process.env.PORT || dev.port, () => {
         console.log(`Started on port ${app.server.address().port}`);

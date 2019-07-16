@@ -19,8 +19,8 @@
     "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
     "dev:backend": "cd backend && yarn dev",
     "dev:frontend": "cd frontend && yarn dev",
-    "pull-config": "aws s3 cp s3://crime-config ./backend/src --recursive --exclude '*' --include '*.json'",
-    "push-config": "aws s3 cp ./backend/src s3://crime-config --recursive --exclude '*' --include '*.json'"
+    "download-config": "aws s3 cp s3://crime-config ./backend/src --recursive --exclude '*' --include '*.json'",
+    "upload-config": "aws s3 cp ./backend/src s3://crime-config --recursive --exclude '*' --include '*.json'"
   },
   "devDependencies": {
     "concurrently": "^4.1.0"

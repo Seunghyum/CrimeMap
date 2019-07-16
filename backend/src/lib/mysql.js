@@ -1,5 +1,8 @@
-import mysql from 'mysql';
-
+const mysql = require('mysql');
+const moment = require('moment');
+const path = require('path');
+const _ = require('lodash');
+const CONFIG_PATH = path.resolve(__dirname, '../config.json');
 const MYSQL_OP = {
     OR: '||',
     GT: '>',
@@ -11,8 +14,9 @@ const MYSQL_OP = {
 };
 
 class Mysql {
-    constructor() {
-        this._dbConfig = __config.databases;
+    constructor(phase = 'production') {
+        this._dbConfig = require(CONFIG_PATH).databases[phase];
+        this.init();
     }
 
     init() {
@@ -23,11 +27,12 @@ class Mysql {
             user,
             password,
             database,
-            connectionLimit : 10
+            multipleStatements : true,
+            connectionLimit : 200
         });
     }
 
-    get() {
+    getConnection() {
         if (!this._pool) {
             this.init();
         }
@@ -35,9 +40,13 @@ class Mysql {
         return this._pool;
     }
 
-    close() {
+    end() {
         if (this._pool) {
-            this._pool.destory();
+            this._pool.end((err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
         }
     }
 
@@ -48,11 +57,7 @@ class Mysql {
 
         if (_.isArray(string)) {
             return _.compact(_.map(string, (val) => {
-                if (_.isString(val)) {
-                    return mysql.escape(val);
-                }
-
-                return null;
+                return mysql.escape(val);
             }));
         }
 
@@ -65,7 +70,7 @@ class Mysql {
         }
 
         return new Promise((resolve, reject) => {
-            this._pool.getConnection((error,connection) => {
+            this._pool.getConnection((error, connection) => {
                 if (error) {
                     // 커넥션을 풀에 반환
                     connection.release();
@@ -83,6 +88,9 @@ class Mysql {
                     resolve(newResults);
                 });
             });
+        }).catch((error) => {
+            console.log(error);
+            this.end();
         });
     }
 
@@ -108,6 +116,69 @@ class Mysql {
 
         return `${whereArray.join(' AND ')}`
     }
+
+    update(table, updateData, where) {
+        if (!table) {
+            return Promise.reject('Table이 존재하지 않습니다.');
+        }
+
+        if (!updateData) {
+            return Promise.reject('UPDATE할 데이터가 필요합니다.');
+        }
+
+        let setDatas = [];
+
+        _.each(updateData, (value, key) => {
+            setDatas.push(`${key} = ${value}`);
+        });
+
+        const setQuery = setDatas.join(', ');
+
+        return this.query(`
+            UPDATE ??
+            SET ${setQuery}
+            WHERE ${this.createWhere({
+                where
+            })}
+        `, [table]).then((result) => {
+            return {
+                affectedRows: result.affectedRows
+            }
+        }).catch(() => {
+
+        });
+    }
+
+    insert(table, insertData) {
+        if (!table) {
+            return Promise.reject('Table이 존재하지 않습니다.');
+        }
+
+        if (!insertData) {
+            return Promise.reject('INSERT할 데이터가 필요합니다.');
+        }
+
+        const values = _.map(_.values(insertData), (val) => {
+            return this.escape(val);
+        });
+
+        return this.query(`
+            INSERT INTO ??
+                (${_.keys(insertData).join(', ')})
+            VALUES
+                (${values.join(', ')})
+        `, [table]).then((result) => {
+            const insertId = result.insertId;
+            return this.query(`
+                SELECT *
+                FROM ??
+                WHERE
+                    id = ?
+            `, [table, insertId]);
+        }).then((result) => {
+            return _.head(result);
+        });
+    }
 }
 
-export default Mysql;
+exports.defults = new Mysql();
