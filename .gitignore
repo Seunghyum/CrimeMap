@@ -3,7 +3,7 @@ yarn-error.log
 backend/node_modules
 backend/yarn-error.log
 backend/dist
-backend/src/config.json
+backend/config.json
 frontend/.cache
 frontend/dist
 frontend/node_modules
@@ -11,4 +11,5 @@ frontend/yarn-error.log
 task/node_modules
 task/yarn-error.log
 files
+.DS_Store
 credentials.csv

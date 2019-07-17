@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const moment = require('moment');
 const path = require('path');
 const _ = require('lodash');
-const CONFIG_PATH = path.resolve(__dirname, '../config.json');
+const CONFIG_PATH = path.resolve(__dirname, '../../config.json');
 const MYSQL_OP = {
     OR: '||',
     GT: '>',
@@ -14,12 +14,18 @@ const MYSQL_OP = {
 };
 
 class Mysql {
-    constructor(phase = 'production') {
-        this._dbConfig = require(CONFIG_PATH).databases[phase];
+    constructor() {
+        this._dbConfig = require(CONFIG_PATH).databases;
+        console.log(this._dbConfig)
         this.init();
     }
 
     init() {
+        if (!this._dbConfig) {
+            console.log('config 데이터가 존재하지 않습니다.');
+            return;
+        }
+
         const { user, password, database, host } = this._dbConfig;
 
         this._pool = mysql.createPool({
@@ -71,22 +77,24 @@ class Mysql {
 
         return new Promise((resolve, reject) => {
             this._pool.getConnection((error, connection) => {
-                if (error) {
-                    // 커넥션을 풀에 반환
-                    connection.release();
-                    reject(error);
-                }
-
-                connection.query(sql, params, (error, results) => {
-                    let newResults = results;
-
+                if (connection) {
                     if (error) {
+                        // 커넥션을 풀에 반환
                         connection.release();
                         reject(error);
                     }
 
-                    resolve(newResults);
-                });
+                    connection.query(sql, params, (error, results) => {
+                        let newResults = results;
+                        connection.release();
+
+                        if (error) {
+                            reject(error);
+                        }
+
+                        resolve(newResults);
+                    });
+                }
             });
         }).catch((error) => {
             console.log(error);
@@ -168,15 +176,7 @@ class Mysql {
             VALUES
                 (${values.join(', ')})
         `, [table]).then((result) => {
-            const insertId = result.insertId;
-            return this.query(`
-                SELECT *
-                FROM ??
-                WHERE
-                    id = ?
-            `, [table, insertId]);
-        }).then((result) => {
-            return _.head(result);
+            return result;
         });
     }
 }
