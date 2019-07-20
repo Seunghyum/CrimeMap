@@ -29,7 +29,10 @@
 .infoWindow {
     z-index: 40;
     min-width: 400px;
-    min-height: 400px;
+    .list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
 }
 .map-ctr-btn {
     z-index: 100;

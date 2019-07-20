@@ -1,11 +1,10 @@
-// import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
 import React, { Component } from "React";
 import noUiSlider from "noUiSlider";
 import "noUiSlider/distribute/nouislider.min.css";
 import { CRIME_TYPE } from "../../model";
-import { throws } from "assert";
+
 interface Props {
-  filterCtlRef: any
+  filterCtlRef: any;
 }
 interface State {
   year: {
@@ -27,7 +26,9 @@ export default class FilterCard extends Component<Props, State> {
       crimeType: "계"
     };
 
-    this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(this);
+    this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(
+      this
+    );
   }
 
   componentDidMount() {
@@ -74,7 +75,11 @@ export default class FilterCard extends Component<Props, State> {
 
   render() {
     return (
-      <div ref={this.props.filterCtlRef} id="filterCard" className="card shadow mb-4">
+      <div
+        ref={this.props.filterCtlRef}
+        id="filterCard"
+        className="card shadow mb-4"
+      >
         <a
           href="#collapseCardExample"
           className="d-block card-header py-3"

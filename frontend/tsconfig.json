@@ -8,6 +8,7 @@
     "incremental": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es2015"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": null
   }
 }

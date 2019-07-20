@@ -1,6 +1,6 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
 import React, { Component, RefObject } from "React";
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 import reactAsyncScript from "react-async-script";
 import sidoGeojson from "../../../sido_2009.json";
 import FilterCard from "./FilterCard";
@@ -28,12 +28,13 @@ interface State {
   zoom: number;
   selectedLocation: any | null;
   infowindow: any;
+  feature: {} | null;
 }
 
 export default class NaverMap extends Component<Props, State> {
   private infoWindowRef: React.RefObject<HTMLInputElement>;
   private filterCtlRef: React.RefObject<HTMLInputElement>;
-  
+
   constructor(props: any) {
     super(props);
 
@@ -43,7 +44,8 @@ export default class NaverMap extends Component<Props, State> {
       center: null,
       zoom: 2,
       selectedLocation: null,
-      infowindow: null
+      infowindow: null,
+      feature: null
     };
 
     this.infoWindowRef = React.createRef();
@@ -75,8 +77,8 @@ export default class NaverMap extends Component<Props, State> {
       };
 
       if (feature.getProperty("focus")) {
-        styleOptions.strokeColor = "red";
-        styleOptions.strokeWeight = 3;
+        styleOptions.strokeColor = "orange";
+        styleOptions.strokeWeight = 1;
         styleOptions.strokeOpacity = 0.7;
       }
 
@@ -85,7 +87,7 @@ export default class NaverMap extends Component<Props, State> {
 
     map.data.addListener("click", ({ feature }: any) => {
       if (this.state.selectedLocation) {
-        this.state.selectedLocation.setProperty("focus", false);
+        feature.setProperty("focus", false);
         map.data.revertStyle();
       }
 
@@ -93,10 +95,9 @@ export default class NaverMap extends Component<Props, State> {
 
       if (feature.getProperty("focus") !== true) {
         feature.setProperty("focus", true);
+      } else {
+        feature.setProperty("focus", false);
       }
-      else {
-        feature.setProperty("focus", false)
-      };
     });
 
     map.data.addListener("mouseover", ({ feature }: any) => {
@@ -122,9 +123,8 @@ export default class NaverMap extends Component<Props, State> {
     });
     this.setState({ infowindow });
 
-    map.data.addListener("click", ({coord}:any) => {
-      if (!infowindow.getMap()) infowindow.open(map, coord);
-      else infowindow.setPosition(coord);
+    map.data.addListener("click", ({ coord }: any) => {
+      infowindow.open(map, coord);
     });
   }
 
@@ -165,7 +165,6 @@ export default class NaverMap extends Component<Props, State> {
     );
   }
 
-
   render() {
     return (
       <div>
@@ -173,7 +172,7 @@ export default class NaverMap extends Component<Props, State> {
         <FilterCard filterCtlRef={this.filterCtlRef} />
         <LocationInfoWindow
           infoWindowRef={this.infoWindowRef}
-          infowindow = {this.infowindow}
+          infowindow={this.infowindow}
           selectedLocation={this.state.selectedLocation}
           infowindow={this.state.infowindow}
         />
