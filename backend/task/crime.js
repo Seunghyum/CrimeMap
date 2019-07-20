@@ -106,9 +106,9 @@ exports.setCrimeData = async function() {
             })({ type, regionName, counts })
         });
 
-        return promise.then((res) => {
-            console.log('범죄 데이터 입력 완료!');
-            return res;
+        return promise.then(() => {
+            console.log(`범죄 데이터 ${result.length}개 입력 완료!`);
+            return;
         }).catch((err) => {
             console.log(err);
         });

@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "strict": true,
+        "removeComments": true,
+        "esModuleInterop": true,
+        "target": "esnext",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "node_modules/*",
+                "src/*",
+            ]
+        }
+    },
+    "include": [
+        "./src/*"
+    ],
+    "exclude": [
+        "./node_modules"
+    ]
+}

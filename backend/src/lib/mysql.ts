@@ -13,10 +13,19 @@ const MYSQL_OP = {
     ASSIGNMENT: '='
 };
 
+interface DbConfig {
+    user?: string;
+    password?: string;
+    database?: string;
+    host?: string;
+}
+
 class Mysql {
+    private _dbConfig?: object;
+    private _pool?: object;
+
     constructor() {
         this._dbConfig = require(CONFIG_PATH).databases;
-        console.log(this._dbConfig)
         this.init();
     }
 
@@ -26,7 +35,7 @@ class Mysql {
             return;
         }
 
-        const { user, password, database, host } = this._dbConfig;
+        const { user, password, database, host }: DbConfig = this._dbConfig;
 
         this._pool = mysql.createPool({
             host,
@@ -48,7 +57,7 @@ class Mysql {
 
     end() {
         if (this._pool) {
-            this._pool.end((err) => {
+            this._pool.end((err: string) => {
                 if (err) {
                     console.log(err);
                 }
@@ -56,7 +65,7 @@ class Mysql {
         }
     }
 
-    escape(string) {
+    escape(string: string | object) {
         if (_.isObject(string)) {
             return null;
         }
@@ -70,7 +79,7 @@ class Mysql {
         return mysql.escape(string);
     }
 
-    query(sql, params) {
+    query(sql: string, params: object) {
         if (!this._pool) {
             this.init();
         }
@@ -102,7 +111,7 @@ class Mysql {
         });
     }
 
-    createWhere(where) {
+    createWhere(where: object) {
         const whereArray = [];
 
         _.each(where, (data, operator) => {
@@ -125,7 +134,7 @@ class Mysql {
         return `${whereArray.join(' AND ')}`
     }
 
-    update(table, updateData, where) {
+    update(table: string, updateData: object, where: string | object) {
         if (!table) {
             return Promise.reject('Table이 존재하지 않습니다.');
         }
@@ -157,7 +166,7 @@ class Mysql {
         });
     }
 
-    insert(table, insertData) {
+    insert(table: string, insertData: object | string) {
         if (!table) {
             return Promise.reject('Table이 존재하지 않습니다.');
         }
