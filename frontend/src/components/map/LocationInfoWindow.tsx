@@ -7,13 +7,13 @@ interface Props {
   infowindow: any;
 }
 interface State {
-  property_SIDO_NM:String | null;
+  property_SIDO_NM: String | null;
   maxCount: number;
   sigungus: {
-    region_name:string;
-    region_code:string;
-    type:number;
-    count:number;
+    region_name: string;
+    region_code: string;
+    type: number;
+    count: number;
   }[];
 }
 
@@ -26,7 +26,7 @@ export default class LocationWindowInfo extends Component<Props, State> {
       maxCount: 10,
       sigungus: [
         {
-          region_name: '수원시',
+          region_name: "수원시",
           region_code: "3461",
           type: 0,
           count: 1
@@ -84,9 +84,9 @@ export default class LocationWindowInfo extends Component<Props, State> {
           region_code: "3461",
           type: 0,
           count: 10
-        },
+        }
       ]
-    }
+    };
     this.setCloseInfoWindow = this.setCloseInfoWindow.bind(this);
   }
 
@@ -95,9 +95,11 @@ export default class LocationWindowInfo extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const dom = document.getElementById("infoWindowCancelBtn") as HTMLElement | null;
-    if(dom) {
-      dom.addEventListener('click', () => {
+    const dom = document.getElementById(
+      "infoWindowCancelBtn"
+    ) as HTMLElement | null;
+    if (dom) {
+      dom.addEventListener("click", () => {
         this.props.infowindow.close();
         this.props.selectedLocation.setProperty("focus", false);
       });
@@ -106,7 +108,7 @@ export default class LocationWindowInfo extends Component<Props, State> {
 
   componentDidUpdate() {
     // if(this.props.selectedLocation) {
-      // this.setState({property_SIDO_NM: this.props.selectedLocation.property_SIDO_NM})
+    // this.setState({property_SIDO_NM: this.props.selectedLocation.property_SIDO_NM})
     // }
   }
 
@@ -116,20 +118,20 @@ export default class LocationWindowInfo extends Component<Props, State> {
         <div className="card shadow infoWindow">
           <div className="card-header py-3">
             <h6 className="d-inline-block m-0 font-weight-bold text-primary">
-              {this.props.selectedLocation ? this.props.selectedLocation.property_SIDO_NM : ""}
+              {this.props.selectedLocation
+                ? this.props.selectedLocation.property_SIDO_NM
+                : ""}
             </h6>
-            <button id='infoWindowCancelBtn' type="button" className="close">
+            <button id="infoWindowCancelBtn" type="button" className="close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
           <div className="card-body list">
-            {
-              this.state.sigungus.map((s:{},idx:number)=>{
-                return (
-                  <GauageBar data={s} maxCount={this.state.maxCount} key={idx}/>
-                );
-              })
-            }
+            {this.state.sigungus.map((s: {}, idx: number) => {
+              return (
+                <GauageBar data={s} maxCount={this.state.maxCount} key={idx} />
+              );
+            })}
           </div>
         </div>
       </div>
