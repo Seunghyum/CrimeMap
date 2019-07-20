@@ -1,10 +1,13 @@
 {
     "defaultSeverity": "error",
-    "extends": ["tslint-config-airbnb", "tslint-react", "tslint-config-prettier"],
+    "extends": [
+        "tslint-config-airbnb",
+        "tslint-config-prettier",
+        "tslint-eslint-rules"
+    ],
     "rules": {
         "variable-name": false,
         "function-name": false,
-        "jsx-no-lambda": false,
         "semicolon": true,
         "whitespace": [true, "check-branch", "check-operator", "check-typecast"]
     }

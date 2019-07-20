@@ -1,17 +1,12 @@
-const { src } = require('gulp');
-const crime = require('./task/crime');
-const { register } = require('ts-node');
-let mysql: object;
+import { src } from 'gulp';
+import crime from './task/crime';
+import mysql from './src/lib/mysql';
 
 // TODO 바벨을 적용하거나, backend로 이동
-function defaultTask(cb: Function) {
-    mysql = require('./src/lib/mysql.ts')['defults'];
-    console.log(mysql);
-
-    // return crime.setCrimeData().then((result) => {
-    //     mysql.end();
-    //     return cb();
-    // });
+async function defaultTask(cb: Function) {
+    const result = await crime.setCrimeData();
+    await mysql.end();
+    return cb();
 }
 
-exports.default = defaultTask;
+export default defaultTask;

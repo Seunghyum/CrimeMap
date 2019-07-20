@@ -1,7 +1,8 @@
-const mysql = require('mysql');
-const moment = require('moment');
-const path = require('path');
-const _ = require('lodash');
+import mysql, { Pool, MysqlError } from 'mysql';
+import moment from 'moment';
+import path from 'path';
+import _ from 'lodash';
+
 const CONFIG_PATH = path.resolve(__dirname, '../../config.json');
 const MYSQL_OP = {
     OR: '||',
@@ -21,23 +22,23 @@ interface DbConfig {
 }
 
 class Mysql {
-    private _dbConfig?: object;
-    private _pool?: object;
+    private dbConfig?: object;
+    private pool?: Pool;
 
     constructor() {
-        this._dbConfig = require(CONFIG_PATH).databases;
+        this.dbConfig = require(CONFIG_PATH).databases;
         this.init();
     }
 
-    init() {
-        if (!this._dbConfig) {
+    async init() {
+        if (!this.dbConfig) {
             console.log('config 데이터가 존재하지 않습니다.');
             return;
         }
 
-        const { user, password, database, host }: DbConfig = this._dbConfig;
+        const { user, password, database, host }: DbConfig = this.dbConfig;
 
-        this._pool = mysql.createPool({
+        this.pool = await mysql.createPool({
             host,
             user,
             password,
@@ -47,22 +48,24 @@ class Mysql {
         });
     }
 
-    getConnection() {
-        if (!this._pool) {
-            this.init();
+    async getConnection() {
+        if (!this.pool) {
+            await this.init();
         }
 
-        return this._pool;
+        return this.pool;
     }
 
     end() {
-        if (this._pool) {
-            this._pool.end((err: string) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+        if (!this.pool) {
+            return;
         }
+
+        this.pool.end((err: MysqlError) => {
+            if (err) {
+                console.log(err);
+            }
+        });
     }
 
     escape(string: string | object) {
@@ -79,13 +82,17 @@ class Mysql {
         return mysql.escape(string);
     }
 
-    query(sql: string, params: object) {
-        if (!this._pool) {
-            this.init();
+    async query(sql: string, params: object) {
+        if (this.pool) {
+            await this.init();
         }
 
         return new Promise((resolve, reject) => {
-            this._pool.getConnection((error, connection) => {
+            if (!this.pool) {
+                return;
+            }
+
+             this.pool.getConnection((error, connection) => {
                 if (connection) {
                     if (error) {
                         // 커넥션을 풀에 반환
@@ -94,14 +101,13 @@ class Mysql {
                     }
 
                     connection.query(sql, params, (error, results) => {
-                        let newResults = results;
                         connection.release();
 
                         if (error) {
                             reject(error);
                         }
 
-                        resolve(newResults);
+                        resolve(results);
                     });
                 }
             });
@@ -112,7 +118,7 @@ class Mysql {
     }
 
     createWhere(where: object) {
-        const whereArray = [];
+        const whereArray: any[] = [];
 
         _.each(where, (data, operator) => {
             if (MYSQL_OP[operator]) {
@@ -131,7 +137,7 @@ class Mysql {
             }
         });
 
-        return `${whereArray.join(' AND ')}`
+        return `${whereArray.join(' AND ')}`;
     }
 
     update(table: string, updateData: object, where: string | object) {
@@ -143,7 +149,7 @@ class Mysql {
             return Promise.reject('UPDATE할 데이터가 필요합니다.');
         }
 
-        let setDatas = [];
+        const setDatas: string[] = [];
 
         _.each(updateData, (value, key) => {
             setDatas.push(`${key} = ${value}`);
@@ -157,10 +163,10 @@ class Mysql {
             WHERE ${this.createWhere({
                 where
             })}
-        `, [table]).then((result) => {
+        `, [table]).then((result: any) => {
             return {
                 affectedRows: result.affectedRows
-            }
+            };
         }).catch(() => {
 
         });
@@ -190,4 +196,4 @@ class Mysql {
     }
 }
 
-exports.defults = new Mysql();
+export default new Mysql();

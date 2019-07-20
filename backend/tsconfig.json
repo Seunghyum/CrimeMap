@@ -4,8 +4,10 @@
         "strict": true,
         "removeComments": true,
         "esModuleInterop": true,
-        "target": "esnext",
+        "target": "es6",
         "noImplicitAny": true,
+        "allowSyntheticDefaultImports": true,
+        "suppressImplicitAnyIndexErrors": true,
         "moduleResolution": "node",
         "sourceMap": true,
         "outDir": "dist",
@@ -14,13 +16,15 @@
             "*": [
                 "node_modules/*",
                 "src/*",
+                "task/*"
             ]
         }
     },
     "include": [
-        "./src/*"
+        "src/*",
+        "task/*"
     ],
     "exclude": [
-        "./node_modules"
+        "node_modules/*"
     ]
 }
