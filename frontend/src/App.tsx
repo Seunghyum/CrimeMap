@@ -8,7 +8,6 @@ import NotFound from "./components/NotFound";
 import "./style/sb-admin-2.min.css";
 import "./style/custom.scss";
 
-
 export class App extends Component {
   render() {
     return (

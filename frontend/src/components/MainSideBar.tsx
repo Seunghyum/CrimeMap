@@ -13,8 +13,14 @@ class MainSideBar extends Component<Props> {
 
   render() {
     return (
-      <ul className="navbar-nav bg-gradient-light sidebar sidebar-light accordion" id="accordionSidebar">
-        <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <ul
+        className="navbar-nav bg-gradient-light sidebar sidebar-light accordion"
+        id="accordionSidebar"
+      >
+        <a
+          className="sidebar-brand d-flex align-items-center justify-content-center"
+          href="index.html"
+        >
           <div className="sidebar-brand-icon rotate-n-15">
             <img src="https://img.icons8.com/ios/30/000000/evidence-filled.png"></img>
           </div>
