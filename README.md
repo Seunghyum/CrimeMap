@@ -2,11 +2,11 @@
 범죄데이터 시각화
 
 ## Stack
+- Typescript
 - Node.js(express)
 - React.js
-- MongoDB
+- MongoDB, Mysql
 - state : Mobx
 - Webpack
-- Typescript
-- GraphQL
+- GraphQL, RESTful
 - [SD2 Admin Bootstrap 템플릿](https://startbootstrap.com/themes/sb-admin-2/)

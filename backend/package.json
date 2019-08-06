@@ -4,7 +4,7 @@
   "description": "express-es6-rest-api 레포로변경. Starter project for an ES6 RESTful Express API",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
+    "dev": "nodemon --exec ts-node src/index.ts",
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
     "start": "node dist",
     "prestart": "npm run -s build",
@@ -32,6 +32,7 @@
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
     "cors": "^2.7.1",
+    "express": "^4.17.1",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "morgan": "^1.8.0",
@@ -41,10 +42,12 @@
     "sequelize": "^5.9.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.5",
     "@types/express": "^4.17.0",
     "@types/gulp": "^4.0.6",
     "@types/lodash": "^4.14.136",
     "@types/moment": "^2.13.0",
+    "@types/morgan": "^1.7.36",
     "@types/mysql": "^2.15.6",
     "@types/node": "^12.6.8",
     "babel-cli": "^6.9.0",
