@@ -7,5 +7,5 @@ frontend/.cache
 frontend/dist
 frontend/node_modules
 frontend/yarn-error.log
-config
+./config
 credentials.csv

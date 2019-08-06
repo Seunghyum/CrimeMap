@@ -1,13 +1,13 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
 import React, { Component, RefObject } from "React";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import reactAsyncScript from "react-async-script";
 import sidoGeojson from "../../../sido_2009.json";
 import FilterCard from "./FilterCard";
 import LocationInfoWindow from "./LocationInfoWindow";
+import { MapClientId } from "../../config/index";
 
-const ClientId: string = "l98mpxcbdb";
-const URL: string = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ClientId}`;
+const URL: string = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${MapClientId}`;
 
 const NaverMapLoad = reactAsyncScript(URL, {
   callbackName: null,
