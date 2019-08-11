@@ -196,4 +196,4 @@ class Mysql {
     }
 }
 
-export default new Mysql();
+export default Mysql;
