@@ -56,7 +56,7 @@ export default class FilterCard extends Component<Props, State> {
     // yearRangeSlider.on('change', (values, handle, unencoded, tap, positions) => {
     yearRangeSlider.on("change", (...args) => {
       const unencoded = args[2];
-      console.log("unencoded : ", unencoded);
+
       this.setState({
         year: {
           start: unencoded[0],
@@ -67,10 +67,7 @@ export default class FilterCard extends Component<Props, State> {
   }
 
   handleCrimeTypeSelectionChange(event: any) {
-    console.log("crimeType : ", event.target.value);
-    this.setState({
-      crimeType: event.target.value
-    });
+    this.setState({crimeType: event.target.value});
   }
 
   render() {

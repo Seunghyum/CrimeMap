@@ -5,7 +5,10 @@
   "rules": {
     "variable-name": false,
     "function-name": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "import-name": [true, { 
+      "react": "React" 
+    }]
   },
   "rulesDirectory": []
 }

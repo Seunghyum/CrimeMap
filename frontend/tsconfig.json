@@ -9,6 +9,6 @@
     "experimentalDecorators": true,
     "lib": ["dom", "es2015"],
     "allowSyntheticDefaultImports": true,
-    "strictNullChecks": null
+    "strictNullChecks": true
   }
 }

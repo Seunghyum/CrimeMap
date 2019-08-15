@@ -16,7 +16,7 @@ export class App extends Component {
           <MainSideBar />
           <div id="content-wrapper" className="d-flex flex-column">
             <Switch>
-              <Route exact path="/" component={Map} />
+              <Route exact={true} path="/" component={Map} />
               <Route path="/intro" component={Intro} />
               <Route component={NotFound} />
             </Switch>

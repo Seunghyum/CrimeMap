@@ -1,8 +1,10 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
-import React, { Component, RefObject } from "React";
+import React, { Component } from "React";
 // import ReactDOM from "react-dom";
+// @ts-ignore
 import reactAsyncScript from "react-async-script";
-import sidoGeojson from "../../../sido_2009.json";
+// @ts-ignore
+import sido_2009Json from "../../../sido_2009.json";
 import FilterCard from "./FilterCard";
 import LocationInfoWindow from "./LocationInfoWindow";
 import { MapClientId } from "../../config/index";
@@ -55,7 +57,7 @@ export default class NaverMap extends Component<Props, State> {
     this.setMapDetail = this.setMapDetail.bind(this);
   }
 
-  setHomeBtnCtl(naver, map, center, zoom) {
+  setHomeBtnCtl(naver: any, map: any, center: any, zoom: number) {
     const homeBtn = '<a class="map-ctr-btn"><i class="fas fa-home"></i></a>';
     const homeBtnCtr = new naver.maps.CustomControl(homeBtn, {
       position: naver.maps.Position.TOP_LEFT
@@ -68,7 +70,7 @@ export default class NaverMap extends Component<Props, State> {
     });
   }
 
-  setMapDetail(map) {
+  setMapDetail(map: any) {
     map.data.setStyle((feature: any) => {
       const styleOptions: ObjectLiteral = {
         strokeColor: "gray",
@@ -112,11 +114,11 @@ export default class NaverMap extends Component<Props, State> {
     });
   }
 
-  setFilterCtl(naver, map) {
+  setFilterCtl(naver: any, map: any) {
     map.controls[naver.maps.Position.TOP_RIGHT].push(this.filterCtlRef.current);
   }
 
-  setInfoWindow(naver, map) {
+  setInfoWindow(naver: any, map: any) {
     const infowindow = new naver.maps.InfoWindow({
       content: this.infoWindowRef.current,
       zIndex: 9999
@@ -146,7 +148,7 @@ export default class NaverMap extends Component<Props, State> {
       maxZoom: 7
     });
 
-    sidoGeojson.forEach((geojson: any) => {
+    sido_2009Json.forEach((geojson: any) => {
       map.data.addGeoJson(geojson);
     });
 
@@ -172,7 +174,6 @@ export default class NaverMap extends Component<Props, State> {
         <FilterCard filterCtlRef={this.filterCtlRef} />
         <LocationInfoWindow
           infoWindowRef={this.infoWindowRef}
-          infowindow={this.infowindow}
           selectedLocation={this.state.selectedLocation}
           infowindow={this.state.infowindow}
         />

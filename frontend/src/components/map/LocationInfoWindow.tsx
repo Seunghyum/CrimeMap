@@ -1,9 +1,12 @@
 import React, { Component } from "React";
-import GauageBar from "./GuageBar";
+import GuageBar from "./GuageBar";
 
 interface Props {
-  infowindowRef: String;
-  selectedLocation: Object;
+  infoWindowRef: React.RefObject<HTMLInputElement>;
+  selectedLocation: {
+    setProperty(name:string, value:boolean):void;
+    property_SIDO_NM: string | null;
+  };
   infowindow: any;
 }
 interface State {
@@ -106,12 +109,6 @@ export default class LocationWindowInfo extends Component<Props, State> {
     }
   }
 
-  componentDidUpdate() {
-    // if(this.props.selectedLocation) {
-    // this.setState({property_SIDO_NM: this.props.selectedLocation.property_SIDO_NM})
-    // }
-  }
-
   render() {
     return (
       <div ref={this.props.infoWindowRef}>
@@ -129,7 +126,7 @@ export default class LocationWindowInfo extends Component<Props, State> {
           <div className="card-body list">
             {this.state.sigungus.map((s: {}, idx: number) => {
               return (
-                <GauageBar data={s} maxCount={this.state.maxCount} key={idx} />
+                <GuageBar data={s} maxCount={this.state.maxCount} key={idx} />
               );
             })}
           </div>

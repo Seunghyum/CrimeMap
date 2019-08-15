@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 interface Props {
   maxCount: number;
-  data: {};
+  data: any;
 }
 interface State {}
 export default class GuageBar extends Component<Props, State> {
@@ -14,14 +14,13 @@ export default class GuageBar extends Component<Props, State> {
 
   setColorClass(per: number) {
     if (per < 20) return "success";
-    else if (per < 40) return "info";
-    else if (per < 60) return "primary";
-    else if (per < 80) return "warning";
-    else return "danger";
+    if (per < 40) return "info";
+    if (per < 60) return "primary";
+    if (per < 80) return "warning";
+    return "danger";
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="row">
         <div className="col-sm-3">
