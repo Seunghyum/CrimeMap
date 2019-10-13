@@ -6,8 +6,8 @@
     "properties": {
         "OBJECTID": 1,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "11",
-        "SIDO_NM": "서울특별시",
+        "CODE": "11",
+        "NAME": "서울특별시",
         "SHAPE_LENG": 189478.054069,
         "SHAPE_AREA": 6.05248658422e+08
     },
@@ -949,8 +949,8 @@
     "properties": {
         "OBJECTID": 2,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "21",
-        "SIDO_NM": "부산광역시",
+        "CODE": "21",
+        "NAME": "부산광역시",
         "SHAPE_LENG": 526479.290598,
         "SHAPE_AREA": 7.83988125135e+08
     },
@@ -1547,8 +1547,8 @@
     "properties": {
         "OBJECTID": 3,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "22",
-        "SIDO_NM": "대구광역시",
+        "CODE": "22",
+        "NAME": "대구광역시",
         "SHAPE_LENG": 215638.399537,
         "SHAPE_AREA": 8.79585938014e+08
     },
@@ -2599,8 +2599,8 @@
     "properties": {
         "OBJECTID": 4,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "23",
-        "SIDO_NM": "인천광역시",
+        "CODE": "23",
+        "NAME": "인천광역시",
         "SHAPE_LENG": 1.22762323868e+06,
         "SHAPE_AREA": 1.09935670248e+09
     },
@@ -4185,8 +4185,8 @@
     "properties": {
         "OBJECTID": 5,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "24",
-        "SIDO_NM": "광주광역시",
+        "CODE": "24",
+        "NAME": "광주광역시",
         "SHAPE_LENG": 141014.894522,
         "SHAPE_AREA": 4.98003505193e+08
     },
@@ -5048,8 +5048,8 @@
     "properties": {
         "OBJECTID": 6,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "25",
-        "SIDO_NM": "대전광역시",
+        "CODE": "25",
+        "NAME": "대전광역시",
         "SHAPE_LENG": 157059.726767,
         "SHAPE_AREA": 5.39472080902e+08
     },
@@ -5460,8 +5460,8 @@
     "properties": {
         "OBJECTID": 7,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "26",
-        "SIDO_NM": "울산광역시",
+        "CODE": "26",
+        "NAME": "울산광역시",
         "SHAPE_LENG": 322752.306825,
         "SHAPE_AREA": 1.06139266649e+09
     },
@@ -6306,8 +6306,8 @@
     "properties": {
         "OBJECTID": 8,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "29",
-        "SIDO_NM": "세종특별자치시",
+        "CODE": "29",
+        "NAME": "세종특별자치시",
         "SHAPE_LENG": 149141.433972,
         "SHAPE_AREA": 4.64844343272e+08
     },
@@ -7188,8 +7188,8 @@
     "properties": {
         "OBJECTID": 9,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "31",
-        "SIDO_NM": "경기도",
+        "CODE": "31",
+        "NAME": "경기도",
         "SHAPE_LENG": 1.37425473827e+06,
         "SHAPE_AREA": 1.02500802119e+10
     },
@@ -10878,8 +10878,8 @@
     "properties": {
         "OBJECTID": 10,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "32",
-        "SIDO_NM": "강원도",
+        "CODE": "32",
+        "NAME": "강원도",
         "SHAPE_LENG": 1.15233757041e+06,
         "SHAPE_AREA": 1.6809249077e+10
     },
@@ -12403,8 +12403,8 @@
     "properties": {
         "OBJECTID": 11,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "33",
-        "SIDO_NM": "충청북도",
+        "CODE": "33",
+        "NAME": "충청북도",
         "SHAPE_LENG": 796054.897252,
         "SHAPE_AREA": 7.40839460115e+09
     },
@@ -14538,8 +14538,8 @@
     "properties": {
         "OBJECTID": 12,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "34",
-        "SIDO_NM": "충청남도",
+        "CODE": "34",
+        "NAME": "충청남도",
         "SHAPE_LENG": 1.917052563e+06,
         "SHAPE_AREA": 8.26308949678e+09
     },
@@ -17919,8 +17919,8 @@
     "properties": {
         "OBJECTID": 13,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "35",
-        "SIDO_NM": "전라북도",
+        "CODE": "35",
+        "NAME": "전라북도",
         "SHAPE_LENG": 1.29541386123e+06,
         "SHAPE_AREA": 8.09036856141e+09
     },
@@ -19864,8 +19864,8 @@
     "properties": {
         "OBJECTID": 14,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "36",
-        "SIDO_NM": "전라남도",
+        "CODE": "36",
+        "NAME": "전라남도",
         "SHAPE_LENG": 7.64327583851e+06,
         "SHAPE_AREA": 1.24213783603e+10
     },
@@ -27662,8 +27662,8 @@
     "properties": {
         "OBJECTID": 15,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "37",
-        "SIDO_NM": "경상북도",
+        "CODE": "37",
+        "NAME": "경상북도",
         "SHAPE_LENG": 1.42785471932e+06,
         "SHAPE_AREA": 1.90291740853e+10
     },
@@ -30565,8 +30565,8 @@
     "properties": {
         "OBJECTID": 16,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "38",
-        "SIDO_NM": "경상남도",
+        "CODE": "38",
+        "NAME": "경상남도",
         "SHAPE_LENG": 3.13876062898e+06,
         "SHAPE_AREA": 1.0553277187e+10
     },
@@ -34116,8 +34116,8 @@
     "properties": {
         "OBJECTID": 17,
         "BASE_YEAR": "2016",
-        "SIDO_CD": "39",
-        "SIDO_NM": "제주특별자치도",
+        "CODE": "39",
+        "NAME": "제주특별자치도",
         "SHAPE_LENG": 705159.393144,
         "SHAPE_AREA": 1.86475093189e+09
     },

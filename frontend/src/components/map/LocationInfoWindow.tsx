@@ -5,12 +5,12 @@ interface Props {
   infoWindowRef: React.RefObject<HTMLInputElement>;
   selectedLocation: {
     setProperty(name:string, value:boolean):void;
-    property_SIDO_NM: string | null;
+    property_NAME: string | null;
   };
   infowindow: any;
 }
 interface State {
-  property_SIDO_NM: String | null;
+  property_NAME: String | null;
   maxCount: number;
   sigungus: {
     region_name: string;
@@ -25,7 +25,7 @@ export default class LocationWindowInfo extends Component<Props, State> {
     super(props);
 
     this.state = {
-      property_SIDO_NM: null,
+      property_NAME: null,
       maxCount: 10,
       sigungus: [
         {
@@ -90,23 +90,34 @@ export default class LocationWindowInfo extends Component<Props, State> {
         }
       ]
     };
-    this.setCloseInfoWindow = this.setCloseInfoWindow.bind(this);
+    this.setFocusLocation = this.setFocusLocation.bind(this);
   }
 
-  setCloseInfoWindow() {
-    if (this.props.infowindow) this.props.infowindow.close();
+  setFocusLocation () {
+    console.log("clicked setFocusLocation")
   }
 
   componentDidMount() {
-    const dom = document.getElementById(
+    const DOMinfoWindowCancelBtn = document.getElementById(
       "infoWindowCancelBtn"
     ) as HTMLElement | null;
-    if (dom) {
-      dom.addEventListener("click", () => {
+    if (DOMinfoWindowCancelBtn) {
+      console.log("====DOMinfoWindowCancelBtn======")
+      DOMinfoWindowCancelBtn.addEventListener("click", () => {
         this.props.infowindow.close();
         this.props.selectedLocation.setProperty("focus", false);
       });
     }
+
+    const DOMguageBarWrapper: void | HTMLCollection = document.getElementsByClassName("guage-bar-wrapper");
+    if (DOMguageBarWrapper && DOMguageBarWrapper.length > 0) {
+      console.log("====DOMguageBarWrapper======")
+      for (let i = 0; i < DOMguageBarWrapper.length; i+=1) {
+        DOMguageBarWrapper[i].addEventListener("click", () => {
+          this.setFocusLocation()
+        });
+      }
+    }    
   }
 
   render() {
@@ -116,7 +127,7 @@ export default class LocationWindowInfo extends Component<Props, State> {
           <div className="card-header py-3">
             <h6 className="d-inline-block m-0 font-weight-bold text-primary">
               {this.props.selectedLocation
-                ? this.props.selectedLocation.property_SIDO_NM
+                ? this.props.selectedLocation.property_NAME
                 : ""}
             </h6>
             <button id="infoWindowCancelBtn" type="button" className="close">
@@ -126,7 +137,9 @@ export default class LocationWindowInfo extends Component<Props, State> {
           <div className="card-body list">
             {this.state.sigungus.map((s: {}, idx: number) => {
               return (
-                <GuageBar data={s} maxCount={this.state.maxCount} key={idx} />
+                <a className="guage-bar-wrapper" key={idx}>
+                  <GuageBar data={s} maxCount={this.state.maxCount} />
+                </a>
               );
             })}
           </div>

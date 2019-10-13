@@ -1,0 +1,131 @@
+#map {
+    height: calc(100vh - 108px);
+}
+#top-filter-nav {
+    border-bottom: solid 1px silver;
+}
+#filterCtl {
+    font-size:14px;
+    z-index:1;
+    .dropdown__container {
+        pointer-events: all;
+    }
+    .filter-nav {
+        padding: 5px 10px;
+        height: 40px;
+        border: solid 1px silver;
+    }
+    .year-filter {
+        width: 250px;
+        margin-bottom: 4.5rem;
+    }
+    .noUi-horizontal {
+        height: 14px;
+    }
+    .noUi-marker-horizontal.noUi-marker-large {
+        height: 10px;
+    }
+
+    .noUi-horizontal .noUi-handle {
+        width: 28px;
+        height: 24px;
+        cursor: pointer;
+        &:before, &:after {
+            height: 10px;
+        }
+        &:before {
+            left: 8px;
+        }
+    }
+    .noUi-pips {
+        font-size: 13px;
+    }
+    .crime-type-filter {
+        height: 70vh;
+        overflow-y: auto;
+        .item{
+            cursor: pointer;
+            font-size: 14px;
+            &:hover {
+                color: silver;
+            }
+        }
+    }
+}
+.infoWindow {
+    z-index: 40;
+    min-width: 400px;
+    .list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    .card-body {
+        padding: 0px;
+        .row {
+            padding: 0.8rem;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba(0,255,255,0.2)
+            }
+        }
+    }
+}
+#map-ctr-btn {
+    z-index: 100;
+    overflow: hidden;
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 2px;
+    background: #fcfcfd;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    i {
+        vertical-align: middle;
+    }
+}
+#map-type-ctr-btn {
+    z-index: 100;
+    overflow: hidden;
+    position: absolute;
+    top: 10px;
+    left: 47px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 2px;
+    background: #fcfcfd;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    i {
+        vertical-align: middle;
+    }
+}
+
+.ctr-active {
+    background-color: #36b9cc !important;
+    color: white !important;
+}
+
+.loading-overlay-wrapper {
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    height: calc(100vh);
+    width: calc(100vw - 14rem);
+    right: 0px;
+    top:0px;
+    z-index: 1000;
+    .loading-overlay {
+        margin: calc(50vh - 40px) auto 0px auto;
+    }
+}
+@media (max-width: 768px) {
+    .loading-overlay-wrapper {
+        width: calc(100vw - 6.5rem);
+    }
+}

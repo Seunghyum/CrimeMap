@@ -1,6 +1,6 @@
 import React from "react";
 
-const NotFound = ({ name }) => {
+const NotFound = () => {
   return (
     <div id="content">
       <br />

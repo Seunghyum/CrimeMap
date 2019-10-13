@@ -24,12 +24,12 @@ export default class GuageBar extends Component<Props, State> {
     return (
       <div className="row">
         <div className="col-sm-3">
-          <h4 className="small font-weight-bold">
+          <h4 className="small font-weight-bold mb-0">
             {this.props.data.region_name}
           </h4>
         </div>
         <div className="col-sm-7">
-          <div className="progress mb-4">
+          <div className="progress">
             <div
               className={`progress-bar bg-${this.setColorClass(
                 (this.props.data.count / this.props.maxCount) * 100

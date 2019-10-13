@@ -10,6 +10,12 @@
     "install": "yarn install:backend && yarn install:frontend",
     "install:backend": "cd backend && yarn install",
     "install:frontend": "cd frontend && yarn install",
+    "add": "yarn add:backend && yarn add:frontend",
+    "add:backend": "cd backend && yarn add",
+    "add:frontend": "cd frontend && yarn add",
+    "remove": "yarn remove:backend && yarn remove:frontend",
+    "remove:backend": "cd backend && yarn remove",
+    "remove:frontend": "cd frontend && yarn remove",
     "build": "yarn build:backend && yarn build:frontend",
     "build:backend": "cd backend && yarn build",
     "build:frontend": "cd frontend && yarn build",
@@ -24,5 +30,8 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1"
   }
 }
