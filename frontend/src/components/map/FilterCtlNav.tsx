@@ -5,7 +5,7 @@ import { CRIME_TYPE } from "../../model";
 
 interface Props {}
 interface State {
-  nav:string | null;
+  nav: string | null;
   year: {
     start: number;
     end: number;
@@ -26,7 +26,9 @@ export default class FilterCtlNav extends Component<Props, State> {
       crimeType: "전체"
     };
 
-    this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(this);
+    this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(
+      this
+    );
     this.onChangeFilterDropdown = this.onChangeFilterDropdown.bind(this);
   }
 
@@ -65,26 +67,29 @@ export default class FilterCtlNav extends Component<Props, State> {
   }
 
   handleCrimeTypeSelectionChange(ct: string) {
-    this.setState({crimeType: ct, nav: null});
+    this.setState({ crimeType: ct, nav: null });
   }
 
-  onChangeFilterDropdown(nav:string | null){
-    this.setState({nav})
+  onChangeFilterDropdown(nav: string | null) {
+    this.setState({ nav });
   }
 
   render() {
     return (
-      <div
-        id="filterCtl"
-        className="container pt-2 pb-2"
-      >
+      <div id="filterCtl" className="container pt-2 pb-2">
         <div className="row">
           <div className="col-md-12">
-            <ul className='menu-horizontal'>
+            <ul className="menu-horizontal">
               <li className="filter-nav">
-                <div className={`dropdown ${this.state.nav === 'year' ? 'dropdown--active' : ''}`} tabIndex={3} onBlur={ () => this.onChangeFilterDropdown(null) }>
-                  <span 
-                    className="dropdown__trigger align-middle" 
+                <div
+                  className={`dropdown ${
+                    this.state.nav === "year" ? "dropdown--active" : ""
+                  }`}
+                  tabIndex={3}
+                  onBlur={() => this.onChangeFilterDropdown(null)}
+                >
+                  <span
+                    className="dropdown__trigger align-middle"
                     onClick={() => this.onChangeFilterDropdown("year")}
                   >
                     연도 : 20{this.state.year.start} ~ 20{this.state.year.end}
@@ -99,9 +104,15 @@ export default class FilterCtlNav extends Component<Props, State> {
               </li>
 
               <li className="filter-nav crime-type-wrapper">
-                <div className={`dropdown ${this.state.nav === 'crime-type' ? 'dropdown--active' : ''}`} tabIndex={0} onBlur={ () => this.onChangeFilterDropdown(null) }>
-                  <span 
-                    className="dropdown__trigger align-middle" 
+                <div
+                  className={`dropdown ${
+                    this.state.nav === "crime-type" ? "dropdown--active" : ""
+                  }`}
+                  tabIndex={0}
+                  onBlur={() => this.onChangeFilterDropdown(null)}
+                >
+                  <span
+                    className="dropdown__trigger align-middle"
                     onClick={() => this.onChangeFilterDropdown("crime-type")}
                   >
                     범죄유형 : {this.state.crimeType}
@@ -109,24 +120,30 @@ export default class FilterCtlNav extends Component<Props, State> {
                   </span>
                   <div className="dropdown__container">
                     <div className="crime-type-filter dropdown__content">
-                      <div  className="item" onClick={() => this.handleCrimeTypeSelectionChange("전체")}>
+                      <div
+                        className="item"
+                        onClick={() =>
+                          this.handleCrimeTypeSelectionChange("전체")
+                        }
+                      >
                         <a>전체</a>
                       </div>
-                      {
-                        CRIME_TYPE.map(ct => (
-                          <div className="item" key={ct} onClick={() => this.handleCrimeTypeSelectionChange(ct)}>
-                            <a>
-                              {ct}
-                            </a>
-                          </div>
-                        ))
-                      }
+                      {CRIME_TYPE.map(ct => (
+                        <div
+                          className="item"
+                          key={ct}
+                          onClick={() =>
+                            this.handleCrimeTypeSelectionChange(ct)
+                          }
+                        >
+                          <a>{ct}</a>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
               </li>
             </ul>
-            
           </div>
         </div>
       </div>

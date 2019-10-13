@@ -4,7 +4,7 @@ import GuageBar from "./GuageBar";
 interface Props {
   infoWindowRef: React.RefObject<HTMLInputElement>;
   selectedLocation: {
-    setProperty(name:string, value:boolean):void;
+    setProperty(name: string, value: boolean): void;
     property_NAME: string | null;
   };
   infowindow: any;
@@ -93,8 +93,8 @@ export default class LocationWindowInfo extends Component<Props, State> {
     this.setFocusLocation = this.setFocusLocation.bind(this);
   }
 
-  setFocusLocation () {
-    console.log("clicked setFocusLocation")
+  setFocusLocation() {
+    console.log("clicked setFocusLocation");
   }
 
   componentDidMount() {
@@ -102,22 +102,24 @@ export default class LocationWindowInfo extends Component<Props, State> {
       "infoWindowCancelBtn"
     ) as HTMLElement | null;
     if (DOMinfoWindowCancelBtn) {
-      console.log("====DOMinfoWindowCancelBtn======")
+      console.log("====DOMinfoWindowCancelBtn======");
       DOMinfoWindowCancelBtn.addEventListener("click", () => {
         this.props.infowindow.close();
         this.props.selectedLocation.setProperty("focus", false);
       });
     }
 
-    const DOMguageBarWrapper: void | HTMLCollection = document.getElementsByClassName("guage-bar-wrapper");
+    const DOMguageBarWrapper: void | HTMLCollection = document.getElementsByClassName(
+      "guage-bar-wrapper"
+    );
     if (DOMguageBarWrapper && DOMguageBarWrapper.length > 0) {
-      console.log("====DOMguageBarWrapper======")
-      for (let i = 0; i < DOMguageBarWrapper.length; i+=1) {
+      console.log("====DOMguageBarWrapper======");
+      for (let i = 0; i < DOMguageBarWrapper.length; i += 1) {
         DOMguageBarWrapper[i].addEventListener("click", () => {
-          this.setFocusLocation()
+          this.setFocusLocation();
         });
       }
-    }    
+    }
   }
 
   render() {

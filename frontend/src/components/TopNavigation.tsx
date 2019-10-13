@@ -34,8 +34,8 @@ class TopNavigation extends Component<Props> {
                   </li>
                   <li>
                     <Link to="/intro">
-                    <i className="far fa-question-circle" />
-                    <span>이 프로젝트는?</span>
+                      <i className="far fa-question-circle" />
+                      <span>이 프로젝트는?</span>
                     </Link>
                   </li>
                 </ul>
