@@ -18,17 +18,19 @@ export default class CrimeTypeFilter extends Component<Props, State> {
       crimeType: "전체"
     };
 
-    this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(this);
+    this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(
+      this
+    );
   }
 
   handleCrimeTypeSelectionChange(ct: string) {
     this.setState({ crimeType: ct });
-    this.props.onBlur()
+    this.props.onBlur();
   }
 
   render() {
     return (
-      <li 
+      <li
         className="filter-nav crime-type-wrapper"
         onClick={this.props.onChangeFilterDropdown}
       >
@@ -45,9 +47,7 @@ export default class CrimeTypeFilter extends Component<Props, State> {
             <div className="crime-type-filter dropdown__content">
               <div
                 className="item"
-                onClick={() =>
-                  this.handleCrimeTypeSelectionChange("전체")
-                }
+                onClick={() => this.handleCrimeTypeSelectionChange("전체")}
               >
                 <a>전체</a>
               </div>
@@ -55,9 +55,7 @@ export default class CrimeTypeFilter extends Component<Props, State> {
                 <div
                   className="item"
                   key={ct}
-                  onClick={() =>
-                    this.handleCrimeTypeSelectionChange(ct)
-                  }
+                  onClick={() => this.handleCrimeTypeSelectionChange(ct)}
                 >
                   <a>{ct}</a>
                 </div>

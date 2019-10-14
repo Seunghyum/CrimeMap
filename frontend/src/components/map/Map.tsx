@@ -81,7 +81,8 @@ export default class NaverMap extends Component<Props, State> {
     // if(mapInitFocusCtlBtnDom) mapInitFocusCtlBtnDom.tooltip('enable')
 
     // 시군구 지도 geojson 경계 변경 버튼
-    const mapTypeChangeBtn = '<a id="map-type-ctr-btn" data-toggle="tooltip" data-placement="bottom" title="행정구역 자세히 보기(시군구)"><i class="fas fa-search-plus"></a>';
+    const mapTypeChangeBtn =
+      '<a id="map-type-ctr-btn" data-toggle="tooltip" data-placement="bottom" title="행정구역 자세히 보기(시군구)"><i class="fas fa-search-plus"></a>';
     const mapTypeChangeBtnCtr = new naver.maps.CustomControl(mapTypeChangeBtn, {
       position: naver.maps.Position.TOP_LEFT
     });

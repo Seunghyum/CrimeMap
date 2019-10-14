@@ -62,10 +62,7 @@ export default class YearFilter extends Component<Props, State> {
 
   render() {
     return (
-      <li 
-        className="filter-nav"
-        onClick={this.props.onChangeFilterDropdown}
-      >
+      <li className="filter-nav" onClick={this.props.onChangeFilterDropdown}>
         <div
           className={`dropdown ${
             this.props.nav === "year" ? "dropdown--active" : ""

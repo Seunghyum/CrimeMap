@@ -1,6 +1,6 @@
 import React, { Component } from "React";
-import YearFilter from "./filters/YearFilter"
-import CrimeTypeFilter from "./filters/CrimeTypeFilter"
+import YearFilter from "./filters/YearFilter";
+import CrimeTypeFilter from "./filters/CrimeTypeFilter";
 // @ts-ignore
 import onClickOutside from "react-onclickoutside";
 
@@ -41,25 +41,28 @@ class FilterCtlNav extends Component<Props, State> {
     this.setState({ nav });
   }
 
-
-  handleClickOutside () {
-    this.onChangeFilterDropdown(null)
+  handleClickOutside() {
+    this.onChangeFilterDropdown(null);
   }
 
   render() {
     return (
       <ul className="menu-horizontal">
-        <YearFilter 
-          nav={this.state.nav} 
+        <YearFilter
+          nav={this.state.nav}
           onBlur={() => this.onChangeFilterDropdown(null)}
-          onChangeFilterDropdown={() => this.onChangeFilterDropdown("year")} />
-        <CrimeTypeFilter 
-          nav={this.state.nav} 
+          onChangeFilterDropdown={() => this.onChangeFilterDropdown("year")}
+        />
+        <CrimeTypeFilter
+          nav={this.state.nav}
           onBlur={() => this.onChangeFilterDropdown(null)}
-          onChangeFilterDropdown={() => {this.onChangeFilterDropdown("crime-type")}}/>
+          onChangeFilterDropdown={() => {
+            this.onChangeFilterDropdown("crime-type");
+          }}
+        />
       </ul>
     );
   }
 }
 
-export default onClickOutside(FilterCtlNav)
+export default onClickOutside(FilterCtlNav);
