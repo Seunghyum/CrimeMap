@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 interface Props {}
 class DashBoard extends Component<Props> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
   }
 

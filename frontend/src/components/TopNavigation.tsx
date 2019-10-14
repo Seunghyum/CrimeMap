@@ -2,12 +2,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-interface Props {
-  // currentTab: string
-}
+interface Props {}
 
 class TopNavigation extends Component<Props> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
   }
 
@@ -28,13 +26,11 @@ class TopNavigation extends Component<Props> {
                 <ul className="menu-horizontal text-left">
                   <li>
                     <Link to="/">
-                      <i className="fas fa-map-marked-alt" />
                       <span>지도시각화</span>
                     </Link>
                   </li>
                   <li>
                     <Link to="/intro">
-                      <i className="far fa-question-circle" />
                       <span>이 프로젝트는?</span>
                     </Link>
                   </li>

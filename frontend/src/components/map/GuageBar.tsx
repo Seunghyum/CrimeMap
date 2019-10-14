@@ -6,7 +6,7 @@ interface Props {
 }
 interface State {}
 export default class GuageBar extends Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     this.setColorClass = this.setColorClass.bind(this);

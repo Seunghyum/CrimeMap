@@ -7,6 +7,12 @@
 #filterCtl {
     font-size:14px;
     z-index:1;
+    .dropdown .dropdown__container{
+        z-index: -10;
+    }
+    .dropdown.dropdown--active .dropdown__container{
+        z-index: 2000 !important;
+    }
     .dropdown__container {
         pointer-events: all;
     }
@@ -14,6 +20,22 @@
         padding: 5px 10px;
         height: 40px;
         border: solid 1px silver;
+        cursor: pointer;
+        &:hover .dropdown__trigger{
+            border-color: black;
+            color: black;
+        }
+        .crime-type-filter {
+            height: 70vh;
+            overflow-y: auto;
+            .item{
+                cursor: pointer;
+                font-size: 14px;
+                &:hover {
+                    color: black;
+                }
+            }
+        }
     }
     .year-filter {
         width: 250px;
@@ -39,17 +61,6 @@
     }
     .noUi-pips {
         font-size: 13px;
-    }
-    .crime-type-filter {
-        height: 70vh;
-        overflow-y: auto;
-        .item{
-            cursor: pointer;
-            font-size: 14px;
-            &:hover {
-                color: silver;
-            }
-        }
     }
 }
 .infoWindow {

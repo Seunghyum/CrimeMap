@@ -7,7 +7,7 @@ interface Props {
 interface State {}
 
 class LoadingOverlay extends Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
   }
 

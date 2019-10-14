@@ -1,7 +1,8 @@
 import React, { Component } from "React";
-import noUiSlider from "noUiSlider";
-import "noUiSlider/distribute/nouislider.min.css";
-import { CRIME_TYPE } from "../../model";
+import YearFilter from "./filters/YearFilter"
+import CrimeTypeFilter from "./filters/CrimeTypeFilter"
+// @ts-ignore
+import onClickOutside from "react-onclickoutside";
 
 interface Props {}
 interface State {
@@ -13,8 +14,8 @@ interface State {
   crimeType: string;
 }
 
-export default class FilterCtlNav extends Component<Props, State> {
-  constructor(props: any) {
+class FilterCtlNav extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -32,40 +33,6 @@ export default class FilterCtlNav extends Component<Props, State> {
     this.onChangeFilterDropdown = this.onChangeFilterDropdown.bind(this);
   }
 
-  componentDidMount() {
-    const slider = document.getElementById("rangeSlider") as HTMLElement;
-
-    const yearRangeSlider = noUiSlider.create(slider, {
-      start: [this.state.year.start, this.state.year.end],
-      snap: true,
-      connect: true,
-      range: {
-        min: 11,
-        "16.5%": 12,
-        "33%": 13,
-        "49.5%": 14,
-        "66%": 15,
-        "82.5%": 16,
-        max: 17
-      },
-      pips: {
-        mode: "steps",
-        density: 16
-      }
-    });
-
-    yearRangeSlider.on("change", (...args) => {
-      const unencoded = args[2];
-
-      this.setState({
-        year: {
-          start: unencoded[0],
-          end: unencoded[1]
-        }
-      });
-    });
-  }
-
   handleCrimeTypeSelectionChange(ct: string) {
     this.setState({ crimeType: ct, nav: null });
   }
@@ -74,79 +41,25 @@ export default class FilterCtlNav extends Component<Props, State> {
     this.setState({ nav });
   }
 
+
+  handleClickOutside () {
+    this.onChangeFilterDropdown(null)
+  }
+
   render() {
     return (
-      <div id="filterCtl" className="container pt-2 pb-2">
-        <div className="row">
-          <div className="col-md-12">
-            <ul className="menu-horizontal">
-              <li className="filter-nav">
-                <div
-                  className={`dropdown ${
-                    this.state.nav === "year" ? "dropdown--active" : ""
-                  }`}
-                  tabIndex={3}
-                  onBlur={() => this.onChangeFilterDropdown(null)}
-                >
-                  <span
-                    className="dropdown__trigger align-middle"
-                    onClick={() => this.onChangeFilterDropdown("year")}
-                  >
-                    연도 : 20{this.state.year.start} ~ 20{this.state.year.end}
-                    <i className="fas fa-angle-down ml-1" />
-                  </span>
-                  <div className="dropdown__container">
-                    <div className="year-filter dropdown__content">
-                      <div id="rangeSlider" className="mb-5" />
-                    </div>
-                  </div>
-                </div>
-              </li>
-
-              <li className="filter-nav crime-type-wrapper">
-                <div
-                  className={`dropdown ${
-                    this.state.nav === "crime-type" ? "dropdown--active" : ""
-                  }`}
-                  tabIndex={0}
-                  onBlur={() => this.onChangeFilterDropdown(null)}
-                >
-                  <span
-                    className="dropdown__trigger align-middle"
-                    onClick={() => this.onChangeFilterDropdown("crime-type")}
-                  >
-                    범죄유형 : {this.state.crimeType}
-                    <i className="fas fa-angle-down ml-1" />
-                  </span>
-                  <div className="dropdown__container">
-                    <div className="crime-type-filter dropdown__content">
-                      <div
-                        className="item"
-                        onClick={() =>
-                          this.handleCrimeTypeSelectionChange("전체")
-                        }
-                      >
-                        <a>전체</a>
-                      </div>
-                      {CRIME_TYPE.map(ct => (
-                        <div
-                          className="item"
-                          key={ct}
-                          onClick={() =>
-                            this.handleCrimeTypeSelectionChange(ct)
-                          }
-                        >
-                          <a>{ct}</a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <ul className="menu-horizontal">
+        <YearFilter 
+          nav={this.state.nav} 
+          onBlur={() => this.onChangeFilterDropdown(null)}
+          onChangeFilterDropdown={() => this.onChangeFilterDropdown("year")} />
+        <CrimeTypeFilter 
+          nav={this.state.nav} 
+          onBlur={() => this.onChangeFilterDropdown(null)}
+          onChangeFilterDropdown={() => {this.onChangeFilterDropdown("crime-type")}}/>
+      </ul>
     );
   }
 }
+
+export default onClickOutside(FilterCtlNav)
