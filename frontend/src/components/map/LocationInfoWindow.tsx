@@ -123,13 +123,15 @@ export default class LocationWindowInfo extends Component<Props, State> {
   }
 
   render() {
+    const {infoWindowRef, selectedLocation} = this.props
+    const {maxCount, sigungus} = this.state
     return (
-      <div ref={this.props.infoWindowRef}>
+      <div ref={infoWindowRef}>
         <div className="card shadow infoWindow">
           <div className="card-header py-3">
             <h6 className="d-inline-block m-0 font-weight-bold text-primary">
-              {this.props.selectedLocation
-                ? this.props.selectedLocation.property_NAME
+              {selectedLocation
+                ? selectedLocation.property_NAME
                 : ""}
             </h6>
             <button id="infoWindowCancelBtn" type="button" className="close">
@@ -137,10 +139,10 @@ export default class LocationWindowInfo extends Component<Props, State> {
             </button>
           </div>
           <div className="card-body list">
-            {this.state.sigungus.map((s: {}, idx: number) => {
+            {sigungus.map((s: {}, idx: number) => {
               return (
                 <a className="guage-bar-wrapper" key={idx}>
-                  <GuageBar data={s} maxCount={this.state.maxCount} />
+                  <GuageBar data={s} maxCount={maxCount} />
                 </a>
               );
             })}

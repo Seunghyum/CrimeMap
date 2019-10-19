@@ -21,25 +21,26 @@ export default class GuageBar extends Component<Props, State> {
   }
 
   render() {
+    const {data, maxCount} = this.props
     return (
       <div className="row">
         <div className="col-sm-3">
           <h4 className="small font-weight-bold mb-0">
-            {this.props.data.region_name}
+            {data.region_name}
           </h4>
         </div>
         <div className="col-sm-7">
           <div className="progress">
             <div
               className={`progress-bar bg-${this.setColorClass(
-                (this.props.data.count / this.props.maxCount) * 100
+                (data.count / maxCount) * 100
               )}`}
               role="progressbar"
               style={{
-                width: `${(this.props.data.count / this.props.maxCount) * 100}%`
+                width: `${(data.count / maxCount) * 100}%`
               }}
               aria-valuenow={
-                (this.props.data.count / this.props.maxCount) * 100
+                (data.count / maxCount) * 100
               }
               aria-valuemin={0}
               aria-valuemax={100}
@@ -50,7 +51,7 @@ export default class GuageBar extends Component<Props, State> {
           <h4 className="small font-weight-bold">
             <span className="float-right">
               {Math.round(
-                (this.props.data.count / this.props.maxCount) * 100 * 100
+                (data.count / maxCount) * 100 * 100
               ) / 100}
               %
             </span>

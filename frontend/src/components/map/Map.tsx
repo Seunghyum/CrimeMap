@@ -91,7 +91,7 @@ export default class NaverMap extends Component<Props, State> {
       mapTypeChangeBtnCtr.getElement(),
       "click",
       () => {
-        let currentMapType = this.state.mapType;
+        const currentMapType = this.state.mapType;
         let changedMapType;
         if (currentMapType === "sido") {
           changedMapType = "sigungu";
@@ -170,35 +170,38 @@ export default class NaverMap extends Component<Props, State> {
   }
 
   initSidoGeojson(map: any) {
+    const {sidoMap, sigunguMap} = this.state
     return new Promise((resolve, reject) => {
-      if (!this.state.sidoMap) this.setState({ sidoMap: sido_2009Json });
-      if (this.state.sigunguMap) {
-        this.state.sigunguMap.forEach((geojson: any) => {
+      if (!sidoMap) this.setState({ sidoMap: sido_2009Json });
+      if (sigunguMap) {
+        sigunguMap.forEach((geojson: any) => {
           map.data.removeGeoJson(geojson);
         });
       }
       resolve();
     }).then(() => {
-      this.state.sidoMap.forEach((geojson: any) => {
+      sidoMap.forEach((geojson: any) => {
         map.data.addGeoJson(geojson);
       });
     });
   }
 
   initSigunguGeojson(map: any) {
+    const {sidoMap, sigunguMap} = this.state
     return new Promise((resolve, reject) => {
-      if (!this.state.sigunguMap)
-        this.setState({ sigunguMap: sigungu_2015Json });
-      if (this.state.sidoMap) {
-        this.state.sidoMap.forEach((geojson: any) => {
+      if (!sigunguMap) this.setState({ sigunguMap: sigungu_2015Json });
+      if (sidoMap) {
+        sidoMap.forEach((geojson: any) => {
           map.data.removeGeoJson(geojson);
         });
       }
       resolve();
     }).then(() => {
-      this.state.sigunguMap.forEach((geojson: any) => {
+      sigunguMap.forEach((geojson: any) => {
         map.data.addGeoJson(geojson);
       });
+    }).catch(err => {
+      console.log('err : ', err)
     });
   }
 
@@ -219,7 +222,6 @@ export default class NaverMap extends Component<Props, State> {
       minZoom: zoom,
       maxZoom: 7
     });
-    console.log("map : ", map);
 
     this.initSidoGeojson(map);
 

@@ -46,15 +46,16 @@ class FilterCtlNav extends Component<Props, State> {
   }
 
   render() {
+    const {nav} = this.state
     return (
       <ul className="menu-horizontal">
         <YearFilter
-          nav={this.state.nav}
+          nav={nav}
           onBlur={() => this.onChangeFilterDropdown(null)}
           onChangeFilterDropdown={() => this.onChangeFilterDropdown("year")}
         />
         <CrimeTypeFilter
-          nav={this.state.nav}
+          nav={nav}
           onBlur={() => this.onChangeFilterDropdown(null)}
           onChangeFilterDropdown={() => {
             this.onChangeFilterDropdown("crime-type");

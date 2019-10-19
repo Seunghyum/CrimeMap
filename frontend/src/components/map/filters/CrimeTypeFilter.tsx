@@ -29,18 +29,20 @@ export default class CrimeTypeFilter extends Component<Props, State> {
   }
 
   render() {
+    const {onChangeFilterDropdown, nav} = this.props
+    const {crimeType} = this.state
     return (
       <li
         className="filter-nav crime-type-wrapper"
-        onClick={this.props.onChangeFilterDropdown}
+        onClick={onChangeFilterDropdown}
       >
         <div
           className={`dropdown ${
-            this.props.nav === "crime-type" ? "dropdown--active" : ""
+            nav === "crime-type" ? "dropdown--active" : ""
           }`}
         >
           <span className="dropdown__trigger align-middle">
-            범죄유형 : {this.state.crimeType}
+            범죄유형 : {crimeType}
             <i className="fas fa-angle-down ml-1" />
           </span>
           <div className="dropdown__container">
