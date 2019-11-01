@@ -123,16 +123,14 @@ export default class LocationWindowInfo extends Component<Props, State> {
   }
 
   render() {
-    const {infoWindowRef, selectedLocation} = this.props
-    const {maxCount, sigungus} = this.state
+    const { infoWindowRef, selectedLocation } = this.props;
+    const { maxCount, sigungus } = this.state;
     return (
       <div ref={infoWindowRef}>
         <div className="card shadow infoWindow">
           <div className="card-header py-3">
             <h6 className="d-inline-block m-0 font-weight-bold text-primary">
-              {selectedLocation
-                ? selectedLocation.property_NAME
-                : ""}
+              {selectedLocation ? selectedLocation.property_NAME : ""}
             </h6>
             <button id="infoWindowCancelBtn" type="button" className="close">
               <span aria-hidden="true">×</span>

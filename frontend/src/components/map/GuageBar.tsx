@@ -21,13 +21,11 @@ export default class GuageBar extends Component<Props, State> {
   }
 
   render() {
-    const {data, maxCount} = this.props
+    const { data, maxCount } = this.props;
     return (
       <div className="row">
         <div className="col-sm-3">
-          <h4 className="small font-weight-bold mb-0">
-            {data.region_name}
-          </h4>
+          <h4 className="small font-weight-bold mb-0">{data.region_name}</h4>
         </div>
         <div className="col-sm-7">
           <div className="progress">
@@ -39,9 +37,7 @@ export default class GuageBar extends Component<Props, State> {
               style={{
                 width: `${(data.count / maxCount) * 100}%`
               }}
-              aria-valuenow={
-                (data.count / maxCount) * 100
-              }
+              aria-valuenow={(data.count / maxCount) * 100}
               aria-valuemin={0}
               aria-valuemax={100}
             />
@@ -50,10 +46,7 @@ export default class GuageBar extends Component<Props, State> {
         <div className="col-sm-2">
           <h4 className="small font-weight-bold">
             <span className="float-right">
-              {Math.round(
-                (data.count / maxCount) * 100 * 100
-              ) / 100}
-              %
+              {Math.round((data.count / maxCount) * 100 * 100) / 100}%
             </span>
           </h4>
         </div>

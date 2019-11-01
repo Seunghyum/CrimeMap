@@ -29,8 +29,8 @@ export default class CrimeTypeFilter extends Component<Props, State> {
   }
 
   render() {
-    const {onChangeFilterDropdown, nav} = this.props
-    const {crimeType} = this.state
+    const { onChangeFilterDropdown, nav } = this.props;
+    const { crimeType } = this.state;
     return (
       <li
         className="filter-nav crime-type-wrapper"

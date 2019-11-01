@@ -28,7 +28,7 @@ export default class YearFilter extends Component<Props, State> {
 
   componentDidMount() {
     const slider = document.getElementById("rangeSlider") as HTMLElement;
-    const {year} = this.state
+    const { year } = this.state;
     const yearRangeSlider = noUiSlider.create(slider, {
       start: [year.start, year.end],
       snap: true,
@@ -61,16 +61,12 @@ export default class YearFilter extends Component<Props, State> {
   }
 
   render() {
-    const {onChangeFilterDropdown, nav} = this.props
-    const {year} = this.state
+    const { onChangeFilterDropdown, nav } = this.props;
+    const { year } = this.state;
 
     return (
       <li className="filter-nav" onClick={onChangeFilterDropdown}>
-        <div
-          className={`dropdown ${
-            nav === "year" ? "dropdown--active" : ""
-          }`}
-        >
+        <div className={`dropdown ${nav === "year" ? "dropdown--active" : ""}`}>
           <span className="dropdown__trigger align-middle">
             연도 : 20{year.start} ~ 20{year.end}
             <i className="fas fa-angle-down ml-1" />
