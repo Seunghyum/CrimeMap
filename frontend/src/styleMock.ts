@@ -1,1 +1,2 @@
-module.exports = {};
+// @ts-ignore
+module.exports = {}

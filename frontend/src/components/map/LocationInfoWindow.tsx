@@ -1,28 +1,28 @@
-import React, { Component } from "React";
-import GuageBar from "./GuageBar";
+import React, { Component } from "React"
+import GuageBar from "./GuageBar"
 
 interface Props {
-  infoWindowRef: React.RefObject<HTMLInputElement>;
+  infoWindowRef: React.RefObject<HTMLInputElement>
   selectedLocation: {
     setProperty(name: string, value: boolean): void;
     property_NAME: string | null;
-  };
-  infowindow: any;
+  }
+  infowindow: any
 }
 interface State {
-  property_NAME: String | null;
-  maxCount: number;
+  property_NAME: String | null
+  maxCount: number
   sigungus: {
     region_name: string;
     region_code: string;
     type: number;
     count: number;
-  }[];
+  }[]
 }
 
 export default class LocationWindowInfo extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
 
     this.state = {
       property_NAME: null,
@@ -89,42 +89,42 @@ export default class LocationWindowInfo extends Component<Props, State> {
           count: 10
         }
       ]
-    };
-    this.setFocusLocation = this.setFocusLocation.bind(this);
+    }
+    this.setFocusLocation = this.setFocusLocation.bind(this)
   }
 
   setFocusLocation() {
-    console.log("clicked setFocusLocation");
+    console.log("clicked setFocusLocation")
   }
 
   componentDidMount() {
     const DOMinfoWindowCancelBtn = document.getElementById(
       "infoWindowCancelBtn"
-    ) as HTMLElement | null;
+    ) as HTMLElement | null
     if (DOMinfoWindowCancelBtn) {
-      console.log("====DOMinfoWindowCancelBtn======");
+      console.log("====DOMinfoWindowCancelBtn======")
       DOMinfoWindowCancelBtn.addEventListener("click", () => {
-        this.props.infowindow.close();
-        this.props.selectedLocation.setProperty("focus", false);
-      });
+        this.props.infowindow.close()
+        this.props.selectedLocation.setProperty("focus", false)
+      })
     }
 
     const DOMguageBarWrapper: void | HTMLCollection = document.getElementsByClassName(
       "guage-bar-wrapper"
-    );
+    )
     if (DOMguageBarWrapper && DOMguageBarWrapper.length > 0) {
-      console.log("====DOMguageBarWrapper======");
+      console.log("====DOMguageBarWrapper======")
       for (let i = 0; i < DOMguageBarWrapper.length; i += 1) {
         DOMguageBarWrapper[i].addEventListener("click", () => {
-          this.setFocusLocation();
-        });
+          this.setFocusLocation()
+        })
       }
     }
   }
 
   render() {
-    const { infoWindowRef, selectedLocation } = this.props;
-    const { maxCount, sigungus } = this.state;
+    const { infoWindowRef, selectedLocation } = this.props
+    const { maxCount, sigungus } = this.state
     return (
       <div ref={infoWindowRef}>
         <div className="card shadow infoWindow">
@@ -142,11 +142,11 @@ export default class LocationWindowInfo extends Component<Props, State> {
                 <a className="guage-bar-wrapper" key={idx}>
                   <GuageBar data={s} maxCount={maxCount} />
                 </a>
-              );
+              )
             })}
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

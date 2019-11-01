@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import ReactLoading from "react-loading";
+import React, { Component } from "react"
+import ReactLoading from "react-loading"
 
 interface Props {
-  isLoading: boolean;
+  isLoading: boolean
 }
 interface State {}
 
 class LoadingOverlay extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
   }
 
   render() {
@@ -25,8 +25,8 @@ class LoadingOverlay extends Component<Props, State> {
           width={64}
         />
       </div>
-    );
+    )
   }
 }
 
-export default LoadingOverlay;
+export default LoadingOverlay

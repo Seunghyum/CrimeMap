@@ -6,9 +6,13 @@
     "variable-name": false,
     "function-name": false,
     "jsx-no-lambda": false,
-    "import-name": [false, { 
-      "react": "React" 
-    }]
+    "import-name": [false, {
+      "react": "React"
+    }],
+    "semicolon": [true, "never"]
   },
-  "rulesDirectory": []
+  "rulesDirectory": [],
+  "additionalItems": false,
+  "no-trailing-whitespace": false,
+  "no-boolean-literal-compare": false
 }

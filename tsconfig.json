@@ -5,10 +5,19 @@
     "strict": true,
     "jsx": "react",
     "rootDir": "./",
+    "outDir": "**/dist",
     "incremental": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es2015"],
     "allowSyntheticDefaultImports": true,
-    "strictNullChecks": true
-  }
+    "strictNullChecks": true,
+    "allowJs": true
+  },
+  "include": [
+    "**/src"
+  ],
+  "exclude": [
+      "node_modules",
+      "dist"
+  ]
 }

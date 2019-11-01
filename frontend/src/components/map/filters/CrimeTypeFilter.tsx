@@ -1,36 +1,36 @@
-import React, { Component } from "React";
-import { CRIME_TYPE } from "../../../model";
+import React, { Component } from "React"
+import { CRIME_TYPE } from "../../../model"
 
 interface Props {
-  nav: string | null;
-  onChangeFilterDropdown: any;
-  onBlur: any;
+  nav: string | null
+  onChangeFilterDropdown: any
+  onBlur: any
 }
 interface State {
-  crimeType: string;
+  crimeType: string
 }
 
 export default class CrimeTypeFilter extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
 
     this.state = {
       crimeType: "전체"
-    };
+    }
 
     this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(
       this
-    );
+    )
   }
 
   handleCrimeTypeSelectionChange(ct: string) {
-    this.setState({ crimeType: ct });
-    this.props.onBlur();
+    this.setState({ crimeType: ct })
+    this.props.onBlur()
   }
 
   render() {
-    const { onChangeFilterDropdown, nav } = this.props;
-    const { crimeType } = this.state;
+    const { onChangeFilterDropdown, nav } = this.props
+    const { crimeType } = this.state
     return (
       <li
         className="filter-nav crime-type-wrapper"
@@ -66,6 +66,6 @@ export default class CrimeTypeFilter extends Component<Props, State> {
           </div>
         </div>
       </li>
-    );
+    )
   }
 }
