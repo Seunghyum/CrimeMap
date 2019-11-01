@@ -1,34 +1,34 @@
-import React, { Component } from "React";
-import noUiSlider from "noUiSlider";
-import "noUiSlider/distribute/nouislider.min.css";
+import React, { Component } from "react"
+import noUiSlider from "noUiSlider"
+import "noUiSlider/distribute/nouislider.min.css"
 
 interface Props {
-  nav: string | null;
-  onChangeFilterDropdown: any;
-  onBlur: any;
+  nav: string | null
+  onChangeFilterDropdown: any
+  onBlur: any
 }
 interface State {
   year: {
     start: number;
     end: number;
-  };
+  }
 }
 
 export default class YearFilter extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
 
     this.state = {
       year: {
         start: 11,
         end: 17
       }
-    };
+    }
   }
 
   componentDidMount() {
-    const slider = document.getElementById("rangeSlider") as HTMLElement;
-    const { year } = this.state;
+    const slider = document.getElementById("rangeSlider") as HTMLElement
+    const { year } = this.state
     const yearRangeSlider = noUiSlider.create(slider, {
       start: [year.start, year.end],
       snap: true,
@@ -46,23 +46,23 @@ export default class YearFilter extends Component<Props, State> {
         mode: "steps",
         density: 16
       }
-    });
+    })
 
     yearRangeSlider.on("change", (...args) => {
-      const unencoded = args[2];
+      const unencoded = args[2]
 
       this.setState({
         year: {
           start: unencoded[0],
           end: unencoded[1]
         }
-      });
-    });
+      })
+    })
   }
 
   render() {
-    const { onChangeFilterDropdown, nav } = this.props;
-    const { year } = this.state;
+    const { onChangeFilterDropdown, nav } = this.props
+    const { year } = this.state
 
     return (
       <li className="filter-nav" onClick={onChangeFilterDropdown}>
@@ -78,6 +78,6 @@ export default class YearFilter extends Component<Props, State> {
           </div>
         </div>
       </li>
-    );
+    )
   }
 }

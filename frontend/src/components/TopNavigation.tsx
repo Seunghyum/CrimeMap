@@ -1,12 +1,12 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import React, { Component } from "react"
 
 interface Props {}
 
 class TopNavigation extends Component<Props> {
   constructor(props: Props) {
-    super(props);
+    super(props)
   }
 
   render() {
@@ -40,8 +40,8 @@ class TopNavigation extends Component<Props> {
           </div>
         </div>
       </nav>
-    );
+    )
   }
 }
 
-export default TopNavigation;
+export default TopNavigation

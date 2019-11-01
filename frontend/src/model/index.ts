@@ -36,4 +36,4 @@ export const CRIME_TYPE: string[] = [
   "선거범죄",
   "병역범죄",
   "기타범죄"
-];
+]

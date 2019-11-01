@@ -1,18 +1,15 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { observer } from "mobx-react";
-import RootStore from "./stores";
+import "bootstrap/dist/css/bootstrap.css"
+import "./assets/styles/application.scss"
+import { observer } from "mobx-react"
+import React, { Component } from "react"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import LoadingOverlay from "./components/LoadingOverlay"
+import Map from "./components/map/Map"
+import NotFound from "./components/NotFound"
+import TopNavigation from "./components/TopNavigation"
+import RootStore from "./stores"
 
-const Store = new RootStore();
-
-import TopNavigation from "./components/TopNavigation";
-import Map from "./components/map/Map";
-import NotFound from "./components/NotFound";
-import LoadingOverlay from "./components/LoadingOverlay";
-
-import "bootstrap/dist/css/bootstrap.css";
-import "./assets/styles/application.scss";
-
+const Store = new RootStore()
 @observer
 export class App extends Component {
   render() {
@@ -31,6 +28,6 @@ export class App extends Component {
           </div>
         </div>
       </Router>
-    );
+    )
   }
 }

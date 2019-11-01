@@ -1,27 +1,27 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 
 interface Props {
-  maxCount: number;
-  data: any;
+  maxCount: number
+  data: any
 }
 interface State {}
 export default class GuageBar extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
 
-    this.setColorClass = this.setColorClass.bind(this);
+    this.setColorClass = this.setColorClass.bind(this)
   }
 
   setColorClass(per: number) {
-    if (per < 20) return "success";
-    if (per < 40) return "info";
-    if (per < 60) return "primary";
-    if (per < 80) return "warning";
-    return "danger";
+    if (per < 20) return "success"
+    if (per < 40) return "info"
+    if (per < 60) return "primary"
+    if (per < 80) return "warning"
+    return "danger"
   }
 
   render() {
-    const { data, maxCount } = this.props;
+    const { data, maxCount } = this.props
     return (
       <div className="row">
         <div className="col-sm-3">
@@ -51,6 +51,6 @@ export default class GuageBar extends Component<Props, State> {
           </h4>
         </div>
       </div>
-    );
+    )
   }
 }

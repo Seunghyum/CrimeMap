@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios from "axios"
 
 export default axios.create({
   baseURL:
+    // @ts-ignore
     process.env.NODE_ENV !== "development"
       ? "https://crime-map.com/v1"
       : "http://localhost:3000/v1",
@@ -11,9 +12,9 @@ export default axios.create({
     "Content-Type": "application/json"
   },
   validateStatus: status => {
-    if (status >= 200 && status < 300) return true;
-    if (status === 304) return true;
-    if (status === 401) return true;
-    return false;
+    if (status >= 200 && status < 300) return true
+    if (status === 304) return true
+    if (status === 401) return true
+    return false
   }
-});
+})

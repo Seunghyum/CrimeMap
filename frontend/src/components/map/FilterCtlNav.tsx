@@ -1,22 +1,22 @@
-import React, { Component } from "React";
-import YearFilter from "./filters/YearFilter";
-import CrimeTypeFilter from "./filters/CrimeTypeFilter";
+import React, { Component } from "React"
+import YearFilter from "./filters/YearFilter"
+import CrimeTypeFilter from "./filters/CrimeTypeFilter"
 // @ts-ignore
-import onClickOutside from "react-onclickoutside";
+import onClickOutside from "react-onclickoutside"
 
 interface Props {}
 interface State {
-  nav: string | null;
+  nav: string | null
   year: {
     start: number;
     end: number;
-  };
-  crimeType: string;
+  }
+  crimeType: string
 }
 
 class FilterCtlNav extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
 
     this.state = {
       nav: null,
@@ -25,28 +25,27 @@ class FilterCtlNav extends Component<Props, State> {
         end: 17
       },
       crimeType: "전체"
-    };
-
+    }
     this.handleCrimeTypeSelectionChange = this.handleCrimeTypeSelectionChange.bind(
       this
-    );
-    this.onChangeFilterDropdown = this.onChangeFilterDropdown.bind(this);
+    )
+    this.onChangeFilterDropdown = this.onChangeFilterDropdown.bind(this)
   }
 
   handleCrimeTypeSelectionChange(ct: string) {
-    this.setState({ crimeType: ct, nav: null });
+    this.setState({ crimeType: ct, nav: null })
   }
 
   onChangeFilterDropdown(nav: string | null) {
-    this.setState({ nav });
+    this.setState({ nav })
   }
 
   handleClickOutside() {
-    this.onChangeFilterDropdown(null);
+    this.onChangeFilterDropdown(null)
   }
 
   render() {
-    const { nav } = this.state;
+    const { nav } = this.state
     return (
       <ul className="menu-horizontal">
         <YearFilter
@@ -58,12 +57,12 @@ class FilterCtlNav extends Component<Props, State> {
           nav={nav}
           onBlur={() => this.onChangeFilterDropdown(null)}
           onChangeFilterDropdown={() => {
-            this.onChangeFilterDropdown("crime-type");
+            this.onChangeFilterDropdown("crime-type")
           }}
         />
       </ul>
-    );
+    )
   }
 }
 
-export default onClickOutside(FilterCtlNav);
+export default onClickOutside(FilterCtlNav)
