@@ -1,0 +1,11 @@
+{
+  "extends": ["tslint-config-airbnb", "tslint-react", "tslint-plugin-prettier", "tslint-config-prettier"],
+  "rules": {
+    "jsx-wrap-multiline": false,
+    "import-name": false,
+    "interface-name": false,
+    "semicolon": [true, "never"],
+    "variable-name": false,
+    "jsx-no-lambda": false
+  }
+}

@@ -1,6 +1,11 @@
 // import naver from "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l98mpxcbdb";
+<<<<<<< HEAD
 import { Link } from "react-router-dom"
 import React, { Component } from "react"
+=======
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+>>>>>>> e0221df5705f65eb0f1013d8d09330776ca029c6
 
 interface Props {}
 
