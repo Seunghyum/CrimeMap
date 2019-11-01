@@ -170,16 +170,17 @@ export default class NaverMap extends Component<Props, State> {
   }
 
   initSidoGeojson(map: any) {
-    const {sidoMap, sigunguMap} = this.state
     return new Promise((resolve, reject) => {
-      if (!sidoMap) this.setState({ sidoMap: sido_2009Json });
+      if (!this.state.sidoMap) this.setState({ sidoMap: sido_2009Json });
+      resolve()
+    }).then(()=> {
+      const {sidoMap, sigunguMap} = this.state
       if (sigunguMap) {
         sigunguMap.forEach((geojson: any) => {
           map.data.removeGeoJson(geojson);
         });
       }
-      resolve();
-    }).then(() => {
+      console.log('sidoMap : ', sidoMap)
       sidoMap.forEach((geojson: any) => {
         map.data.addGeoJson(geojson);
       });
@@ -187,16 +188,16 @@ export default class NaverMap extends Component<Props, State> {
   }
 
   initSigunguGeojson(map: any) {
-    const {sidoMap, sigunguMap} = this.state
     return new Promise((resolve, reject) => {
-      if (!sigunguMap) this.setState({ sigunguMap: sigungu_2015Json });
+      if (!this.state.sigunguMap) this.setState({ sigunguMap: sigungu_2015Json });
+      resolve();
+    }).then(() => {
+      const {sidoMap, sigunguMap} = this.state
       if (sidoMap) {
         sidoMap.forEach((geojson: any) => {
           map.data.removeGeoJson(geojson);
         });
       }
-      resolve();
-    }).then(() => {
       sigunguMap.forEach((geojson: any) => {
         map.data.addGeoJson(geojson);
       });
