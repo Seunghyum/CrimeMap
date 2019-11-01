@@ -14,9 +14,9 @@ class LoadingOverlay extends Component<Props, State> {
   render() {
     return (
       <div
-        className={
-          `loading-overlay-wrapper ${this.props.isLoading ? "" : "d-none"}`
-        }
+        className={`loading-overlay-wrapper ${
+          this.props.isLoading ? "" : "d-none"
+        }`}
       >
         <ReactLoading
           className="loading-overlay"

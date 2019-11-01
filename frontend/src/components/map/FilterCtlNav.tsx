@@ -46,7 +46,7 @@ class FilterCtlNav extends Component<Props, State> {
   }
 
   render() {
-    const {nav} = this.state
+    const { nav } = this.state;
     return (
       <ul className="menu-horizontal">
         <YearFilter
