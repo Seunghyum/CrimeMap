@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { Component } from "react"
-=======
 import React, { Component } from "React"
->>>>>>> e0221df5705f65eb0f1013d8d09330776ca029c6
 import noUiSlider from "noUiSlider"
 import "noUiSlider/distribute/nouislider.min.css"
 
