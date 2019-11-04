@@ -1,0 +1,14 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+    - "9000:80"
+    links:
+    - mysql
+  mysql:
+    image: mysql
+    ports:
+    - "3306:3306"
